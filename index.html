@@ -1,740 +1,2784 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemilang Teknik Service - Service Elektronik Profesional</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Gemilang Teknik Service – Jasa Service AC, Kulkas, Mesin Cuci, Water Heater &amp; TV Depok</title>
+    <meta name="description"
+        content="Gemilang Teknik Service – Jasa reparasi elektronik rumah tangga profesional: AC, kulkas, mesin cuci, water heater, TV. Teknisi bersertifikat, bergaransi, harga terjangkau di Depok &amp; sekitarnya.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
+        /* ═══════════════════════════════════
+           DESIGN TOKENS – DARK MODE
+        ═══════════════════════════════════ */
         :root {
-            --primary-blue: #1a73e8;
-            --dark-blue: #0d47a1;
-            --light-blue: #e8f0fe;
-            --accent-blue: #4285f4;
-            --text-dark: #202124;
-            --text-light: #5f6368;
-            --white: #ffffff;
+            --bg: #080c18;
+            --bg-2: #0d1223;
+            --bg-3: #111827;
+            --bg-card: #131c2e;
+            --border: rgba(255, 255, 255, 0.07);
+            --border-2: rgba(255, 255, 255, 0.13);
+            --primary: #3b82f6;
+            --primary-d: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.3);
+            --accent: #06b6d4;
+            --accent2: #8b5cf6;
+            --gold: #f59e0b;
+            --green: #10b981;
+            --text: #f0f6ff;
+            --text-2: #cbd5e1;
+            --text-muted: #94a3b8;
+            --radius-xs: 8px;
+            --radius-sm: 12px;
+            --radius: 18px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
+            --shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 32px 80px rgba(0, 0, 0, 0.6);
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --tap-min: 46px;
         }
-        
-        * {
+
+        /* ═══════════════════════════════════
+           LIGHT MODE TOKENS
+        ═══════════════════════════════════ */
+        [data-theme="light"] {
+            --bg: #f5f7ff;
+            --bg-2: #eef1fc;
+            --bg-3: #e8edfa;
+            --bg-card: #ffffff;
+            --border: rgba(59, 82, 158, 0.1);
+            --border-2: rgba(59, 82, 158, 0.18);
+            --text: #0f1629;
+            --text-2: #374151;
+            --text-muted: #556072;
+            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.06);
+            --shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 32px 80px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ═══════════════════════════════════
+           RESET & BASE
+        ═══════════════════════════════════ */
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
         body {
-            line-height: 1.6;
-            color: var(--text-dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            overflow-x: hidden;
+            width: 100%;
+            font-size: 16.5px;
+            transition: background var(--transition), color var(--transition);
+            -webkit-font-smoothing: antialiased;
         }
-        
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* Visible keyboard focus for everyone, especially screen-reader / keyboard users */
+        a:focus-visible,
+        button:focus-visible,
+        .theme-toggle:focus-visible,
+        .menu-toggle:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 8px;
+        }
+
+        /* Respect reduced-motion preference: calms every animation instantly */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ═══════════════════════════════════
+           UTILITIES
+        ═══════════════════════════════════ */
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
-        
-        /* Header */
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 16px 30px;
+            border-radius: 100px;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition);
+            white-space: nowrap;
+            text-decoration: none;
+            min-height: var(--tap-min);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            box-shadow: 0 0 28px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 48px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: white;
+            backdrop-filter: blur(12px);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        [data-theme="light"] .btn-ghost {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.15);
+            color: var(--text-2);
+        }
+
+        [data-theme="light"] .btn-ghost:hover {
+            background: rgba(0, 0, 0, 0.09);
+        }
+
+        .btn-wa {
+            background: linear-gradient(135deg, #25d366, #1ead55);
+            color: white;
+            box-shadow: 0 0 28px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-wa i {
+            font-size: 21px;
+        }
+
+        .btn-wa:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 48px rgba(37, 211, 102, 0.55);
+        }
+
+        .btn-phone {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(12px);
+        }
+
+        .btn-phone:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-3px);
+        }
+
+        [data-theme="light"] .btn-phone {
+            background: rgba(0, 0, 0, 0.07);
+            border-color: rgba(0, 0, 0, 0.16);
+            color: var(--text-2);
+        }
+
+        [data-theme="light"] .btn-phone:hover {
+            background: rgba(0, 0, 0, 0.11);
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12.5px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 14px;
+        }
+
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '';
+            width: 24px;
+            height: 1.5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(27px, 4vw, 46px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 17px;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════
+           REVEAL ANIMATIONS — gentle & short so nothing feels jumpy on any device
+        ═══════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+        .reveal-left.visible,
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .d1 {
+            transition-delay: .06s;
+        }
+
+        .d2 {
+            transition-delay: .12s;
+        }
+
+        .d3 {
+            transition-delay: .18s;
+        }
+
+        .d4 {
+            transition-delay: .24s;
+        }
+
+        .d5 {
+            transition-delay: .3s;
+        }
+
+        .d6 {
+            transition-delay: .36s;
+        }
+
+        /* ═══════════════════════════════════
+           HEADER & NAV
+        ═══════════════════════════════════ */
         header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             width: 100%;
             z-index: 1000;
+            transition: background var(--transition), box-shadow var(--transition);
         }
-        
+
+        header.scrolled {
+            background: rgba(8, 12, 24, 0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="light"] header.scrolled {
+            background: rgba(245, 247, 255, 0.96);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.07), 0 8px 40px rgba(0, 0, 0, 0.08);
+        }
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 18px 0;
+            transition: padding var(--transition);
         }
-        
+
+        header.scrolled nav {
+            padding: 12px 0;
+        }
+
+        /* Logo */
         .logo {
             display: flex;
             align-items: center;
+            gap: 11px;
         }
-        
-        .logo img {
-            height: 40px;
-            margin-right: 10px;
-        }
-        
-        .logo h1 {
-            color: var(--primary-blue);
-            font-size: 24px;
-            font-weight: 700;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
-        
-        .cta-button {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .cta-button:hover {
-            background-color: var(--dark-blue);
-            color: var(--white);
-        }
-        
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: black;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-            color: var(--white);
-            padding: 150px 0 100px;
-            text-align: center;
-        }
-        
-        .hero h2 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .secondary-button {
-            background-color: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .secondary-button:hover {
-            background-color: var(--white);
-            color: var(--primary-blue);
-        }
-        
-        /* Services Section */
-        .services {
-            padding: 80px 0;
-            background-color: var(--white);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title h3 {
-            font-size: 36px;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background-color: var(--white);
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-icon {
-            background-color: var(--light-blue);
-            color: var(--primary-blue);
-            font-size: 40px;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .service-content {
-            padding: 25px;
-        }
-        
-        .service-content h4 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-        
-        .service-content p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-        
-        .learn-more {
-            color: var(--primary-blue);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .learn-more i {
-            margin-left: 5px;
-            transition: transform 0.3s;
-        }
-        
-        .learn-more:hover i {
-            transform: translateX(5px);
-        }
-        
-        /* About Section */
-        .about {
-            padding: 80px 0;
-            background-color: var(--light-blue);
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .about-image {
-            flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-text h3 {
-            font-size: 36px;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-        }
-        
-        .about-text p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-        
-        .features {
-            margin-top: 30px;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-        
-        .feature-icon {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
+            font-size: 19px;
+            color: white;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            transition: transform var(--transition);
             flex-shrink: 0;
         }
-        
-        .feature-text h4 {
+
+        .logo:hover .logo-icon {
+            transform: rotate(-8deg) scale(1.06);
+        }
+
+        .logo-text {
+            line-height: 1.25;
+        }
+
+        .logo-line1 {
             font-size: 18px;
-            margin-bottom: 5px;
-            color: var(--text-dark);
+            font-weight: 800;
+            color: #fff;
         }
-        
-        .feature-text p {
-            color: var(--text-light);
-            margin-bottom: 0;
+
+        .logo-line2 {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 1px;
         }
-        
-        /* Testimonials */
-        .testimonials {
-            padding: 80px 0;
-            background-color: var(--white);
+
+        [data-theme="light"] header.scrolled .logo-line1 {
+            color: var(--text);
         }
-        
-        .testimonial-grid {
+
+        /* Nav links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 600;
+            padding: 11px 16px;
+            border-radius: var(--radius-xs);
+            color: rgba(255, 255, 255, 0.85);
+            transition: color var(--transition), background var(--transition);
+            min-height: var(--tap-min);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+            color: white !important;
+            font-weight: 700 !important;
+            padding: 11px 24px !important;
+            border-radius: 100px !important;
+            box-shadow: 0 0 22px var(--primary-glow);
+            transition: transform var(--transition), box-shadow var(--transition) !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 38px rgba(59, 130, 246, 0.55) !important;
+        }
+
+        [data-theme="light"] header.scrolled .nav-links a:not(.nav-cta) {
+            color: var(--text-2);
+        }
+
+        [data-theme="light"] header.scrolled .nav-links a:not(.nav-cta):hover {
+            color: var(--text);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            width: var(--tap-min);
+            height: var(--tap-min);
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all var(--transition);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        [data-theme="light"] header.scrolled .theme-toggle {
+            border-color: rgba(0, 0, 0, 0.13);
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text-muted);
+        }
+
+        .t-sun,
+        .t-moon {
+            position: absolute;
+            transition: opacity .35s, transform .4s;
+        }
+
+        .t-sun {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0.5);
+        }
+
+        .t-moon {
+            opacity: 1;
+            transform: rotate(0) scale(1);
+        }
+
+        [data-theme="light"] .t-sun {
+            opacity: 1;
+            transform: rotate(0) scale(1);
+        }
+
+        [data-theme="light"] .t-moon {
+            opacity: 0;
+            transform: rotate(90deg) scale(0.5);
+        }
+
+        /* ═══════════════════════════════════
+           ANIMATED HAMBURGER BUTTON (3 BARS)
+        ═══════════════════════════════════ */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: var(--tap-min);
+            height: var(--tap-min);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .menu-toggle:hover {
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.12);
+        }
+
+        [data-theme="light"] header.scrolled .menu-toggle {
+            border-color: rgba(0, 0, 0, 0.13);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .menu-toggle .bar {
+            display: block;
+            width: 22px;
+            height: 2.5px;
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 4px;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, background-color 0.35s ease;
+            transform-origin: center;
+        }
+
+        [data-theme="light"] header.scrolled .menu-toggle .bar {
+            background-color: var(--text-2);
+        }
+
+        /* Morph 3 bars to X on active */
+        .menu-toggle.active .bar-1 {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar-2 {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .menu-toggle.active .bar-3 {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        /* ═══════════════════════════════════
+           HERO
+        ═══════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 96px;
+            padding-bottom: 48px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+            filter: brightness(0.18) saturate(1.1);
+            animation: heroZoom 30s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+
+        @keyframes heroZoom {
+            from {
+                transform: scale(1.03);
+            }
+
+            to {
+                transform: scale(1.09);
+            }
+        }
+
+        [data-theme="light"] .hero-bg {
+            filter: brightness(0.14) saturate(1.0);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(8, 12, 24, 0.62) 0%, rgba(11, 18, 38, 0.32) 50%, rgba(6, 182, 212, 0.05) 100%);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent 70%);
+            top: -150px;
+            right: -100px;
+            animation: orbA 20s ease-in-out infinite alternate;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.22), transparent 70%);
+            bottom: -100px;
+            left: -80px;
+            animation: orbB 24s ease-in-out infinite alternate;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.2), transparent 70%);
+            top: 40%;
+            left: 38%;
+            animation: orbC 16s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbA {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(30px, -30px) scale(1.06);
+            }
+        }
+
+        @keyframes orbB {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(-22px, 36px) scale(1.08);
+            }
+        }
+
+        @keyframes orbC {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(15px, -15px) scale(0.95);
+            }
+        }
+
+        [data-theme="light"] .orb {
+            opacity: 0.35;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: rgba(59, 130, 246, 0.14);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            color: #bcdcff;
+            font-weight: 600;
+            font-size: 13.5px;
+            padding: 9px 20px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+            backdrop-filter: blur(12px);
+            animation: slideDown .7s ease both;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: blink 2.4s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(34px, 5.8vw, 70px);
+            font-weight: 800;
+            line-height: 1.15;
+            color: #fff;
+            margin-bottom: 22px;
+            animation: slideUp .7s .1s ease both;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.78);
+            max-width: 560px;
+            margin-bottom: 40px;
+            animation: slideUp .7s .18s ease both;
+            line-height: 1.75;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            animation: slideUp .7s .26s ease both;
+        }
+
+        /* Hero Stats Grid - Clean & Responsive */
+        .hero-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, auto);
+            gap: 32px;
+            align-items: center;
+            margin-top: 56px;
+            animation: slideUp .7s .34s ease both;
+            width: fit-content;
         }
-        
-        .testimonial-card {
-            background-color: var(--light-blue);
-            padding: 30px;
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-num {
+            font-size: 37px;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.68));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-lbl {
+            font-size: 12.5px;
+            color: rgba(255, 255, 255, 0.58);
+            margin-top: 6px;
+            letter-spacing: .4px;
+        }
+
+        .stat-div {
+            width: 1px;
+            height: 46px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 10.5px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: slideUp 1s .8s ease both;
+        }
+
+        .scroll-mouse {
+            width: 22px;
+            height: 36px;
+            border-radius: 20px;
+            border: 1.5px solid rgba(255, 255, 255, 0.22);
+            display: flex;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-mouse::after {
+            content: '';
+            width: 5px;
+            height: 9px;
             border-radius: 10px;
+            background: var(--primary);
+            animation: scrollDot 2.4s ease-in-out infinite;
+        }
+
+        @keyframes scrollDot {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            80% {
+                transform: translateY(12px);
+                opacity: 0;
+            }
+
+            81% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ═══════════════════════════════════
+           TRUST TICKER BAR
+        ═══════════════════════════════════ */
+        .trust-bar {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .trust-track {
+            display: flex;
+            gap: 60px;
+            animation: trustScroll 34s linear infinite;
+            width: max-content;
+        }
+
+        .trust-track:hover,
+        .trust-track.paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes trustScroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14.5px;
+            white-space: nowrap;
+            transition: color var(--transition);
+        }
+
+        .trust-item i {
+            font-size: 17px;
+            color: var(--primary);
+        }
+
+        /* ═══════════════════════════════════
+           BRAND LOGOS SECTION
+        ═══════════════════════════════════ */
+        .brands-section {
+            padding: 56px 0;
+            background: var(--bg-2);
+            border-bottom: 1px solid var(--border);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .brands-label {
+            text-align: center;
+            font-size: 12.5px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .brands-marquee-wrap {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .brands-marquee-wrap::before,
+        .brands-marquee-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .brands-marquee-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-2), transparent);
+        }
+
+        .brands-marquee-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-2), transparent);
+        }
+
+        .brands-track {
+            display: flex;
+            align-items: center;
+            animation: brandScroll 38s linear infinite;
+            width: max-content;
+        }
+
+        .brands-track:hover,
+        .brands-track.paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes brandScroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .brand-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 52px;
+            cursor: pointer;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .brand-item:hover {
+            transform: scale(1.1) translateY(-2px);
+        }
+
+        .brand-logo {
+            font-size: 21px;
+            font-weight: 900;
+            letter-spacing: -.5px;
+            color: var(--text-muted);
+            white-space: nowrap;
+            filter: grayscale(1) opacity(0.55);
+            transition: color var(--transition), filter var(--transition);
+        }
+
+        .brand-item:hover .brand-logo {
+            filter: grayscale(0) opacity(1);
+        }
+
+        [data-brand="samsung"]:hover .brand-logo {
+            color: #1428a0;
+        }
+
+        [data-brand="lg"]:hover .brand-logo {
+            color: #a50034;
+        }
+
+        [data-brand="sharp"]:hover .brand-logo {
+            color: #00a0e9;
+        }
+
+        [data-brand="panasonic"]:hover .brand-logo {
+            color: #003087;
+        }
+
+        [data-brand="daikin"]:hover .brand-logo {
+            color: #007dc3;
+        }
+
+        [data-brand="toshiba"]:hover .brand-logo {
+            color: #e4002b;
+        }
+
+        [data-brand="aqua"]:hover .brand-logo {
+            color: #0088cc;
+        }
+
+        [data-brand="mitsubishi"]:hover .brand-logo {
+            color: #e60012;
+        }
+
+        [data-brand="electrolux"]:hover .brand-logo {
+            color: #004990;
+        }
+
+        [data-brand="polytron"]:hover .brand-logo {
+            color: #cc0000;
+        }
+
+        [data-theme="light"] .brand-logo {
+            filter: grayscale(1) opacity(0.42);
+        }
+
+        [data-theme="light"] .brand-item:hover .brand-logo {
+            filter: grayscale(0) opacity(1);
+        }
+
+        /* ═══════════════════════════════════
+           SERVICES
+        ═══════════════════════════════════ */
+        .services {
+            background: var(--bg);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
             position: relative;
         }
-        
-        .testimonial-card::before {
-            content: '"';
-            font-size: 80px;
-            color: var(--primary-blue);
-            opacity: 0.1;
+
+        .service-card::before {
+            content: '';
             position: absolute;
-            top: 10px;
-            left: 20px;
-            font-family: serif;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(6, 182, 212, 0.04));
+            opacity: 0;
+            transition: opacity var(--transition);
+            pointer-events: none;
+            border-radius: var(--radius);
         }
-        
-        .testimonial-content {
-            margin-bottom: 20px;
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 32px rgba(59, 130, 246, 0.2);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        [data-theme="light"] .service-card {
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="light"] .service-card:hover {
+            box-shadow: 0 20px 48px rgba(59, 130, 246, 0.16), 0 0 0 1px rgba(59, 130, 246, 0.2);
+        }
+
+        .service-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .7s ease;
+            filter: brightness(0.85);
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.06);
+        }
+
+        [data-theme="light"] .service-img img {
+            filter: brightness(0.92);
+        }
+
+        .service-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(8, 12, 24, 0.85));
+        }
+
+        [data-theme="light"] .service-img-overlay {
+            background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.45));
+        }
+
+        .service-icon-badge {
+            position: absolute;
+            bottom: 18px;
+            left: 20px;
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            color: white;
+            box-shadow: 0 8px 24px var(--primary-glow);
+        }
+
+        .service-body {
+            padding: 22px 22px 24px;
             position: relative;
             z-index: 1;
         }
-        
-        .testimonial-author {
+
+        .service-body h3 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .service-body p {
+            color: var(--text-muted);
+            font-size: 14.5px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .service-tags {
             display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .tag {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 5px 12px;
+            border-radius: 100px;
+            transition: all var(--transition);
+        }
+
+        .service-card:hover .tag {
+            background: rgba(59, 130, 246, 0.16);
+            border-color: rgba(59, 130, 246, 0.35);
+        }
+
+        [data-theme="light"] .tag {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.22);
+        }
+
+        /* ═══════════════════════════════════
+           ABOUT
+        ═══════════════════════════════════ */
+        .about {
+            background: var(--bg-2);
+        }
+
+        .about-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
             align-items: center;
         }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-img-main {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .about-img-main img {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            display: block;
+            transition: transform .7s ease;
+        }
+
+        .about-img-main:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-float {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius);
+            padding: 20px 26px;
+            text-align: center;
+            box-shadow: 0 16px 40px var(--primary-glow);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .af-num {
+            font-size: 40px;
+            font-weight: 800;
+            color: white;
+            line-height: 1;
+        }
+
+        .af-lbl {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.88);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .about-dots {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: radial-gradient(circle, var(--primary) 1.5px, transparent 1.5px);
+            background-size: 18px 18px;
+            opacity: 0.18;
+            pointer-events: none;
+        }
+
+        .about-text h2 {
+            font-size: clamp(27px, 3.5vw, 42px);
+            font-weight: 800;
+            margin-bottom: 18px;
+            line-height: 1.25;
+        }
+
+        .about-text>p {
+            color: var(--text-muted);
+            font-size: 16.5px;
+            margin-bottom: 36px;
+            line-height: 1.85;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 20px 22px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+
+        .feature-item:hover {
+            background: rgba(59, 130, 246, 0.07);
+            border-color: rgba(59, 130, 246, 0.28);
+            transform: translateX(6px);
+        }
+
+        [data-theme="light"] .feature-item {
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="light"] .feature-item:hover {
+            background: rgba(59, 130, 246, 0.06);
+        }
+
+        .feat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .fi-blue {
+            background: rgba(59, 130, 246, 0.14);
+            color: var(--primary);
+        }
+
+        .fi-cyan {
+            background: rgba(6, 182, 212, 0.14);
+            color: var(--accent);
+        }
+
+        .fi-purple {
+            background: rgba(139, 92, 246, 0.14);
+            color: var(--accent2);
+        }
+
+        .fi-gold {
+            background: rgba(245, 158, 11, 0.14);
+            color: var(--gold);
+        }
+
+        .feat-text h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .feat-text p {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ═══════════════════════════════════
+           HOW IT WORKS
+        ═══════════════════════════════════ */
+        .how {
+            background: var(--bg);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 52px;
+            left: calc(12.5% + 10px);
+            right: calc(12.5% + 10px);
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0.18;
+            z-index: 0;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 34px 24px;
+            text-align: center;
+            transition: all var(--transition);
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .step-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.35);
+            box-shadow: var(--shadow), 0 0 0 1px rgba(59, 130, 246, 0.15);
+        }
+
+        [data-theme="light"] .step-card {
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="light"] .step-card:hover {
+            box-shadow: 0 16px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .step-num {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            opacity: .75;
+        }
+
+        .step-icon-wrap {
+            width: 66px;
+            height: 66px;
+            border-radius: 18px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            color: white;
+            box-shadow: 0 8px 24px var(--primary-glow);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .step-card:hover .step-icon-wrap {
+            transform: scale(1.08) rotate(-4deg);
+            box-shadow: 0 12px 36px rgba(59, 130, 246, 0.5);
+        }
+
+        .step-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════
+           TESTIMONIALS
+        ═══════════════════════════════════ */
+        .testimonials {
+            background: var(--bg-2);
+        }
+
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .testi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .testi-card::after {
+            content: '\201C';
+            position: absolute;
+            top: -8px;
+            right: 18px;
+            font-size: 110px;
+            color: var(--primary);
+            opacity: 0.07;
+            font-family: Georgia, serif;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .testi-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="light"] .testi-card {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 14px;
+        }
+
+        .stars i {
+            color: var(--gold);
+            font-size: 14px;
+        }
+
+        .testi-text {
+            font-size: 15.5px;
+            color: var(--text-2);
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testi-avatar {
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             overflow: hidden;
-            margin-right: 15px;
+            border: 2px solid var(--primary);
+            flex-shrink: 0;
         }
-        
-        .author-avatar img {
+
+        .testi-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
-        .author-info h5 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: var(--text-dark);
+
+        .author-name {
+            font-weight: 700;
+            font-size: 15px;
         }
-        
-        .author-info p {
-            color: var(--text-light);
-            font-size: 14px;
+
+        .author-loc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
-        
-        /* CTA Section */
-        .cta {
-            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-            color: var(--white);
-            padding: 80px 0;
-            text-align: center;
+
+        .author-loc i {
+            font-size: 11px;
+            margin-right: 3px;
         }
-        
-        .cta h3 {
-            font-size: 36px;
-            margin-bottom: 20px;
+
+        /* ═══════════════════════════════════
+           CTA
+        ═══════════════════════════════════ */
+        .cta-section {
+            background: var(--bg);
+            padding: 100px 0;
         }
-        
-        .cta p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--text-dark);
-            color: var(--white);
-            padding: 60px 0 20px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
+
+        .cta-box {
             position: relative;
-            padding-bottom: 10px;
+            overflow: hidden;
+            text-align: center;
+            background: linear-gradient(135deg, #0b1629 0%, #0d1e38 50%, #071526 100%);
+            border: 1px solid rgba(59, 130, 246, 0.22);
+            border-radius: var(--radius-xl);
+            padding: 80px 60px;
         }
-        
-        .footer-column h4::after {
-            content: '';
+
+        .cta-blob-1 {
             position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--primary-blue);
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 280px;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: .1;
+            pointer-events: none;
         }
-        
-        .footer-column ul {
-            list-style: none;
+
+        .cta-blob-2 {
+            position: absolute;
+            bottom: -60px;
+            right: 10%;
+            width: 300px;
+            height: 200px;
+            background: var(--accent);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .08;
+            pointer-events: none;
         }
-        
-        .footer-column ul li {
-            margin-bottom: 10px;
+
+        [data-theme="light"] .cta-box {
+            background: linear-gradient(135deg, #dae4ff 0%, #c9d9ff 50%, #d5e8ff 100%);
+            border-color: rgba(59, 130, 246, 0.2);
         }
-        
-        .footer-column ul li a {
-            color: #bdc1c6;
-            text-decoration: none;
-            transition: color 0.3s;
+
+        [data-theme="light"] .cta-blob-1 {
+            opacity: .06;
         }
-        
-        .footer-column ul li a:hover {
-            color: var(--white);
+
+        [data-theme="light"] .cta-blob-2 {
+            opacity: .05;
         }
-        
-        .footer-column .contact-info {
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-box h2 {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 800;
+            margin-bottom: 18px;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        [data-theme="light"] .cta-box h2 {
+            color: var(--text);
+        }
+
+        .cta-box p {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 550px;
+            margin: 0 auto 40px;
+            line-height: 1.75;
+        }
+
+        [data-theme="light"] .cta-box p {
+            color: var(--text-muted);
+        }
+
+        .cta-buttons {
             display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ═══════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════ */
+        footer {
+            background: #050810;
+            border-top: 1px solid var(--border);
+            padding: 72px 0 0;
+        }
+
+        [data-theme="light"] footer {
+            background: var(--bg-3);
+            border-color: var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1fr 1.3fr;
+            gap: 48px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .footer-col h4 {
+            font-size: 15.5px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .footer-col p {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            line-height: 1.85;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: color var(--transition), gap var(--transition);
+            min-height: var(--tap-min);
+        }
+
+        .footer-col ul li a i {
+            font-size: 10px;
+            transition: transform var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            gap: 10px;
+        }
+
+        .footer-col ul li a:hover i {
+            transform: translateX(2px);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            gap: 12px;
             align-items: flex-start;
             margin-bottom: 15px;
         }
-        
-        .contact-icon {
-            color: var(--primary-blue);
-            margin-right: 10px;
+
+        .footer-contact-item i {
+            color: var(--primary);
+            font-size: 16px;
             margin-top: 3px;
+            flex-shrink: 0;
         }
-        
+
+        .footer-contact-item a,
+        .footer-contact-item span {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            transition: color var(--transition);
+            line-height: 1.6;
+        }
+
+        .footer-contact-item a:hover {
+            color: var(--text);
+        }
+
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 9px;
+            margin-top: 22px;
         }
-        
+
         .social-links a {
-            color: var(--white);
-            background-color: rgba(255, 255, 255, 0.1);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.3s;
-            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 16px;
+            transition: all var(--transition);
         }
-        
+
         .social-links a:hover {
-            background-color: var(--primary-blue);
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
         }
-        
+
+        [data-theme="light"] .social-links a {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.09);
+        }
+
         .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #bdc1c6;
-            font-size: 14px;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .hero h2 {
-                font-size: 36px;
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom span {
+            color: var(--primary);
+        }
+
+        /* ═══════════════════════════════════
+           FLOATING BUTTONS
+        ═══════════════════════════════════ */
+        .float-wa {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 58px;
+            padding: 0 22px 0 18px;
+            border-radius: 100px;
+            background: linear-gradient(135deg, #25d366, #1ead55);
+            font-size: 26px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
+            animation: waPulse 3.2s ease-in-out infinite;
+            transition: transform var(--transition);
+        }
+
+        .float-wa:hover {
+            transform: scale(1.05);
+        }
+
+        .float-wa-label {
+            font-size: 14.5px;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            white-space: nowrap;
+        }
+
+        @keyframes waPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
             }
-            
+
+            50% {
+                box-shadow: 0 8px 40px rgba(37, 211, 102, 0.75), 0 0 0 10px rgba(37, 211, 102, 0.08);
+            }
+        }
+
+        .back-top {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            z-index: 999;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 17px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all var(--transition);
+        }
+
+        .back-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-top:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* ═══════════════════════════════════
+           RESPONSIVE SYSTEM — phone / tablet / desktop
+           Breakpoints: >1100 desktop, 900–1100 small-desktop/tablet-landscape,
+           641–900 tablet, ≤640 phone, ≤380 small phone
+        ═══════════════════════════════════ */
+
+        /* ---- Small desktop / tablet landscape ---- */
+        @media(max-width:1100px) {
+            section {
+                padding: 80px 0;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+            }
+
+            .steps-grid::before {
+                display: none;
+            }
+
+            .testi-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1.2fr 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
+        /* ---- Tablet (portrait) ---- */
+        @media(max-width:1024px) {
+            .about-wrap {
+                grid-template-columns: 1fr;
+                gap: 44px;
+            }
+
+            .about-visual {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .about-img-main img {
+                height: 360px;
+            }
+
+            .about-float {
+                right: 12px;
+                bottom: -14px;
+                padding: 16px 20px;
+            }
+
+            .af-num {
+                font-size: 32px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+
+            .cta-box {
+                padding: 60px 36px;
+            }
+        }
+
+        /* ---- Tablet general tune-up (also catches iPad-ish widths) ---- */
+        @media(max-width:900px) and (min-width:769px) {
+            .container {
+                padding: 0 32px;
+            }
+
+            .hero h1 {
+                font-size: clamp(32px, 6vw, 52px);
+            }
+
+            .hero-buttons {
+                gap: 12px;
+            }
+
+            .btn {
+                padding: 15px 26px;
+                font-size: 15.5px;
+            }
+
+            .nav-links a {
+                padding: 10px 13px;
+                font-size: 14.5px;
+            }
+        }
+
+        /* ---- Phone / small tablet shared rules ---- */
+        @media(max-width:768px) {
+            section {
+                padding: 60px 0;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding-top: 84px;
+                min-height: 100svh;
+            }
+
+            .hero h1 {
+                font-size: clamp(28px, 7vw, 44px);
+                line-height: 1.18;
+            }
+
             .hero p {
-                font-size: 18px;
-            }
-            
-            .section-title h3 {
-                font-size: 30px;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .about-image {
+                font-size: 16px;
                 margin-bottom: 30px;
             }
-        }
-        
-        @media (max-width: 768px) {
+
+            .section-title {
+                margin-bottom: 44px;
+            }
+
+            .section-title p {
+                font-size: 15.5px;
+            }
+
+            /* Calm the ambient orbs down on phones: they cost paint time and
+               don't add anything a small screen can appreciate */
+            .orb {
+                filter: blur(60px);
+                opacity: 0.5;
+            }
+
+            .orb-1,
+            .orb-2 {
+                width: 340px;
+                height: 340px;
+            }
+
+            .orb-3 {
+                width: 220px;
+                height: 220px;
+            }
+
+            /* Show Mobile Hamburger */
             .menu-toggle {
-                display: block;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--white);
-                flex-direction: column;
-                padding: 20px 0;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-            
-            .nav-links.active {
                 display: flex;
             }
-            
+
+            /* Mobile Animated Dropdown Nav */
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 14px;
+                right: 14px;
+                background: rgba(11, 15, 30, 0.98);
+                backdrop-filter: blur(28px);
+                -webkit-backdrop-filter: blur(28px);
+                border: 1px solid var(--border-2);
+                border-radius: var(--radius);
+                flex-direction: column;
+                padding: 14px;
+                gap: 2px;
+                box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-12px);
+                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+                pointer-events: none;
+                max-height: calc(100svh - 100px);
+                overflow-y: auto;
+            }
+
+            [data-theme="light"] .nav-links {
+                background: rgba(245, 247, 255, 0.99);
+            }
+
+            .nav-links.open {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
             .nav-links li {
-                margin: 0;
-                padding: 10px 20px;
+                width: 100%;
             }
-            
-            .nav-links li:last-child {
-                padding-top: 20px;
+
+            .nav-links a {
+                width: 100%;
+                border-radius: var(--radius-xs);
+                padding: 15px 18px;
+                font-size: 16.5px;
+                font-weight: 600;
+                color: rgba(255, 255, 255, 0.9);
+                min-height: 52px;
             }
-            
-            .hero {
-                padding: 120px 0 80px;
+
+            [data-theme="light"] .nav-links a {
+                color: var(--text-2);
             }
-            
-            .cta h3 {
-                font-size: 28px;
+
+            .nav-links a:hover,
+            .nav-links a:active {
+                color: #fff;
+                background: rgba(255, 255, 255, 0.09);
             }
-            
-            .cta p {
-                font-size: 16px;
+
+            [data-theme="light"] .nav-links a:hover,
+            [data-theme="light"] .nav-links a:active {
+                color: var(--text);
+                background: rgba(0, 0, 0, 0.05);
             }
-        }
-        
-        @media (max-width: 576px) {
-            .hero h2 {
-                font-size: 28px;
+
+            .nav-cta {
+                text-align: center;
+                justify-content: center;
+                margin-top: 8px;
+                font-size: 16.5px !important;
             }
-            
-            .hero p {
-                font-size: 16px;
+
+            /* Responsive Hero Stats - 3 columns, clear cards for easy reading */
+            .hero-stats {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                width: 100%;
+                margin-top: 36px;
             }
-            
+
+            .stat-div {
+                display: none;
+            }
+
+            .stat-item {
+                text-align: center;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid var(--border);
+                padding: 14px 6px;
+                border-radius: var(--radius-sm);
+            }
+
+            .stat-num {
+                font-size: 23px;
+            }
+
+            .stat-lbl {
+                font-size: 11px;
+                margin-top: 4px;
+                line-height: 1.35;
+            }
+
+            /* Hero buttons stacked, big and easy to tap */
             .hero-buttons {
                 flex-direction: column;
-                gap: 15px;
-            }
-            
-            .hero-buttons a {
+                gap: 12px;
                 width: 100%;
-                text-align: center;
             }
-            
-            .section-title h3 {
+
+            .hero-buttons .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 17px 24px;
+                font-size: 16.5px;
+            }
+
+            /* Services & Steps grid on mobile — one clean column */
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .step-card {
+                padding: 26px 22px;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step-icon-wrap {
+                margin: 0 0 16px 0;
+            }
+
+            /* Testimonials */
+            .testi-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            /* Feature list breathing room */
+            .feature-item {
+                padding: 18px;
+            }
+
+            /* Footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 34px;
+            }
+
+            footer {
+                padding: 48px 0 0;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+
+            /* Float buttons: WhatsApp keeps its label so it's unmistakable,
+               back-to-top sits comfortably clear of the thumb zone */
+            .float-wa {
+                height: 54px;
+                padding: 0 20px 0 16px;
+                font-size: 24px;
+                bottom: 18px;
+                right: 18px;
+            }
+
+            .back-top {
+                width: 46px;
+                height: 46px;
+                bottom: 80px;
+                left: 18px;
+                font-size: 16px;
+            }
+
+            /* CTA */
+            .cta-box {
+                padding: 44px 22px;
+            }
+
+            .cta-box p {
+                font-size: 15.5px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                padding: 17px 24px;
+                font-size: 16.5px;
+            }
+
+            /* Scroll hint hidden on mobile */
+            .scroll-hint {
+                display: none;
+            }
+
+            /* Trust ticker & brand marquee move a touch slower on phones so
+               text is easy to read for anyone taking their time */
+            .trust-track {
+                animation-duration: 26s;
+                gap: 44px;
+            }
+
+            .brands-track {
+                animation-duration: 30s;
+            }
+
+            .trust-item {
+                font-size: 13.5px;
+            }
+        }
+
+        /* ---- Small phones ---- */
+        @media(max-width:480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero h1 {
+                font-size: clamp(26px, 8vw, 34px);
+            }
+
+            .hero-badge {
+                font-size: 12px;
+                padding: 7px 14px;
+            }
+
+            .about-img-main img {
+                height: 260px;
+            }
+
+            .about-float {
+                right: 8px;
+                bottom: -12px;
+                padding: 12px 16px;
+            }
+
+            .af-num {
                 font-size: 26px;
             }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
+
+            .af-lbl {
+                font-size: 10.5px;
             }
-            
-            .footer-column {
-                margin-bottom: 20px;
+
+            .brand-item {
+                padding: 0 26px;
+            }
+
+            .brand-logo {
+                font-size: 16px;
+            }
+
+            .brands-marquee-wrap::before,
+            .brands-marquee-wrap::after {
+                width: 36px;
+            }
+
+            .float-wa-label {
+                display: none;
+            }
+
+            .float-wa {
+                width: 52px;
+                height: 52px;
+                padding: 0;
+                justify-content: center;
+                border-radius: 50%;
+            }
+
+            .logo-line1 {
+                font-size: 16px;
+            }
+
+            .logo-line2 {
+                font-size: 10.5px;
+            }
+        }
+
+        /* ---- Very small phones (older/budget devices) ---- */
+        @media(max-width:360px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .stat-num {
+                font-size: 20px;
+            }
+
+            .stat-lbl {
+                font-size: 10px;
+            }
+        }
+
+        /* Touch Devices Optimization: no ghost hover states that stick,
+           tap feedback still confirms the press for anyone unsure their
+           tap registered */
+        @media(hover:none) {
+
+            .service-card:hover,
+            .step-card:hover,
+            .testi-card:hover,
+            .feature-item:hover,
+            .brand-item:hover {
+                transform: none;
+            }
+
+            .service-card:active,
+            .step-card:active,
+            .feature-item:active {
+                transform: scale(0.99);
+            }
+
+            .btn:active {
+                transform: scale(0.97);
+            }
+        }
+
+        /* ---- Landscape phones (short viewport height) ---- */
+        @media(max-width:900px) and (max-height:480px) and (orientation:landscape) {
+            .hero {
+                min-height: auto;
+                padding-top: 96px;
+                padding-bottom: 40px;
+            }
+
+            .hero-stats {
+                margin-top: 24px;
             }
         }
     </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
+
+    <!-- ══ HEADER ══ -->
+    <header id="site-header">
         <div class="container">
             <nav>
-                <div class="logo">
-                    <h1>Gemilang Teknik Service</h1>
-                </div>
-                <div class="menu-toggle" id="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <a href="#home" class="logo">
+                    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="logo-text">
+                        <div class="logo-line1">Gemilang Teknik</div>
+                        <div class="logo-line2">Service Elektronik</div>
+                    </div>
+                </a>
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#services">Layanan</a></li>
-                    <li><a href="#about">Tentang Kami</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#how">Cara Kerja</a></li>
                     <li><a href="#testimonials">Testimoni</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                    <li><a style="color: white;" target="_blank" href="https://wa.me/6285102805321" class="cta-button">Hubungi Kami</a></li>
+                    <li><a href="https://wa.me/6285102805321?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20konsultasi"
+                            target="_blank" class="nav-cta">Hubungi Kami</a></li>
                 </ul>
+                <div class="nav-right">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Ganti mode terang/gelap">
+                        <i class="fas fa-sun t-sun"></i>
+                        <i class="fas fa-moon t-moon"></i>
+                    </button>
+                    <div class="menu-toggle" id="mobile-menu" role="button" tabindex="0" aria-label="Buka menu navigasi"
+                        aria-expanded="false">
+                        <span class="bar bar-1"></span>
+                        <span class="bar bar-2"></span>
+                        <span class="bar bar-3"></span>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- ══ HERO ══ -->
     <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
         <div class="container">
-            <h2>Service Elektronik Profesional & Terpercaya</h2>
-            <p>Kami menyediakan layanan perbaikan untuk berbagai perangkat elektronik rumah tangga dengan teknisi berpengalaman dan bergaransi.</p>
-            <div class="hero-buttons">
-                <a href="#services" class="cta-button">Lihat Layanan</a>
-                <a href="#contact" class="secondary-button">Konsultasi Gratis</a>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Teknisi Profesional &bull; Depok &amp; Sekitarnya
+                </div>
+                <h1>Servis Elektronik<br><span class="gradient-text">Rumah Tangga</span><br>Profesional</h1>
+                <p>AC tidak dingin? Kulkas rusak? Mesin cuci bermasalah? Teknisi bersertifikat kami siap datang ke
+                    lokasi Anda &mdash; cepat, bergaransi, dan harga transparan.</p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/6285102805321?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20memperbaiki%20perangkat%20elektronik%20saya"
+                        target="_blank" class="btn btn-wa">
+                        <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <a href="#services" class="btn btn-ghost">
+                        <i class="fas fa-list"></i> Lihat Layanan
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-num">10+</div>
+                        <div class="stat-lbl">Tahun Pengalaman</div>
+                    </div>
+                    <div class="stat-div"></div>
+                    <div class="stat-item">
+                        <div class="stat-num">5000+</div>
+                        <div class="stat-lbl">Pelanggan Puas</div>
+                    </div>
+                    <div class="stat-div"></div>
+                    <div class="stat-item">
+                        <div class="stat-num">100%</div>
+                        <div class="stat-lbl">Bergaransi</div>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-mouse"></div>
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- ══ TRUST TICKER ══ -->
+    <div class="trust-bar">
+        <div class="trust-track">
+            <div class="trust-item"><i class="fas fa-shield-check"></i> Garansi Service</div>
+            <div class="trust-item"><i class="fas fa-truck-fast"></i> Teknisi Ke Lokasi</div>
+            <div class="trust-item"><i class="fas fa-star"></i> Rating 5 Bintang</div>
+            <div class="trust-item"><i class="fas fa-clock"></i> Respons Cepat</div>
+            <div class="trust-item"><i class="fas fa-tag"></i> Harga Transparan</div>
+            <div class="trust-item"><i class="fas fa-tools"></i> Sparepart Original</div>
+            <div class="trust-item"><i class="fas fa-user-graduate"></i> Teknisi Bersertifikat</div>
+            <div class="trust-item"><i class="fas fa-headset"></i> Layanan 7 Hari</div>
+            <div class="trust-item"><i class="fas fa-shield-check"></i> Garansi Service</div>
+            <div class="trust-item"><i class="fas fa-truck-fast"></i> Teknisi Ke Lokasi</div>
+            <div class="trust-item"><i class="fas fa-star"></i> Rating 5 Bintang</div>
+            <div class="trust-item"><i class="fas fa-clock"></i> Respons Cepat</div>
+            <div class="trust-item"><i class="fas fa-tag"></i> Harga Transparan</div>
+            <div class="trust-item"><i class="fas fa-tools"></i> Sparepart Original</div>
+            <div class="trust-item"><i class="fas fa-user-graduate"></i> Teknisi Bersertifikat</div>
+            <div class="trust-item"><i class="fas fa-headset"></i> Layanan 7 Hari</div>
+        </div>
+    </div>
+
+    <!-- ══ BRAND LOGOS ══ -->
+    <div class="brands-section">
+        <p class="brands-label">Kami Melayani Berbagai Merek Ternama</p>
+        <div class="brands-marquee-wrap">
+            <div class="brands-track">
+                <div class="brand-item" data-brand="samsung">
+                    <div class="brand-logo">SAMSUNG</div>
+                </div>
+                <div class="brand-item" data-brand="lg">
+                    <div class="brand-logo">LG</div>
+                </div>
+                <div class="brand-item" data-brand="sharp">
+                    <div class="brand-logo">SHARP</div>
+                </div>
+                <div class="brand-item" data-brand="panasonic">
+                    <div class="brand-logo">Panasonic</div>
+                </div>
+                <div class="brand-item" data-brand="daikin">
+                    <div class="brand-logo">DAIKIN</div>
+                </div>
+                <div class="brand-item" data-brand="toshiba">
+                    <div class="brand-logo">TOSHIBA</div>
+                </div>
+                <div class="brand-item" data-brand="aqua">
+                    <div class="brand-logo">AQUA</div>
+                </div>
+                <div class="brand-item" data-brand="mitsubishi">
+                    <div class="brand-logo">MITSUBISHI</div>
+                </div>
+                <div class="brand-item" data-brand="electrolux">
+                    <div class="brand-logo">Electrolux</div>
+                </div>
+                <div class="brand-item" data-brand="polytron">
+                    <div class="brand-logo">POLYTRON</div>
+                </div>
+                <div class="brand-item" data-brand="samsung">
+                    <div class="brand-logo">SAMSUNG</div>
+                </div>
+                <div class="brand-item" data-brand="lg">
+                    <div class="brand-logo">LG</div>
+                </div>
+                <div class="brand-item" data-brand="sharp">
+                    <div class="brand-logo">SHARP</div>
+                </div>
+                <div class="brand-item" data-brand="panasonic">
+                    <div class="brand-logo">Panasonic</div>
+                </div>
+                <div class="brand-item" data-brand="daikin">
+                    <div class="brand-logo">DAIKIN</div>
+                </div>
+                <div class="brand-item" data-brand="toshiba">
+                    <div class="brand-logo">TOSHIBA</div>
+                </div>
+                <div class="brand-item" data-brand="aqua">
+                    <div class="brand-logo">AQUA</div>
+                </div>
+                <div class="brand-item" data-brand="mitsubishi">
+                    <div class="brand-logo">MITSUBISHI</div>
+                </div>
+                <div class="brand-item" data-brand="electrolux">
+                    <div class="brand-logo">Electrolux</div>
+                </div>
+                <div class="brand-item" data-brand="polytron">
+                    <div class="brand-logo">POLYTRON</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ SERVICES ══ -->
     <section class="services" id="services">
         <div class="container">
-            <div class="section-title">
-                <h3>Layanan Kami</h3>
-                <p>Kami menawarkan berbagai layanan perbaikan untuk perangkat elektronik rumah tangga Anda</p>
+            <div class="section-title reveal">
+                <div class="section-eyebrow">Layanan Kami</div>
+                <h2>Semua Kebutuhan Servis <span class="gradient-text">Elektronik</span> Anda</h2>
+                <p>Dari AC hingga TV, kami menangani semua perangkat elektronik rumah tangga dengan profesional dan
+                    bergaransi.</p>
             </div>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-snowflake"></i>
+                <div class="service-card reveal d1">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&auto=format&fit=crop&q=80"
+                            alt="Service AC Air Conditioner" loading="lazy">
+                        <div class="service-img-overlay"></div>
+                        <div class="service-icon-badge"><i class="fas fa-wind"></i></div>
                     </div>
-                    <div class="service-content">
-                        <h4>Service AC</h4>
-                        <p>Perbaikan, pembersihan, dan perawatan AC split, AC standing, dan AC window untuk semua merek.</p>
-                        <a href="#" class="learn-more">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-blender"></i>
-                    </div>
-                    <div class="service-content">
-                        <h4>Service Kulkas</h4>
-                        <p>Perbaikan kulkas 1 pintu, 2 pintu, side by side, dan showcase untuk berbagai merek ternama.</p>
-                        <a href="#" class="learn-more">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-body">
+                        <h3>Service AC</h3>
+                        <p>Cuci AC, isi freon, perbaikan kompresor, dan troubleshoot semua merek &mdash; Daikin,
+                            Panasonic, LG, Sharp, Samsung.</p>
+                        <div class="service-tags">
+                            <span class="tag">Tidak Dingin</span>
+                            <span class="tag">Bocor Air</span>
+                            <span class="tag">Cuci AC</span>
+                        </div>
                     </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tshirt"></i>
+                <div class="service-card reveal d2">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop&q=80"
+                            alt="Service Kulkas Refrigerator" loading="lazy">
+                        <div class="service-img-overlay"></div>
+                        <div class="service-icon-badge"><i class="fas fa-temperature-low"></i></div>
                     </div>
-                    <div class="service-content">
-                        <h4>Service Mesin Cuci</h4>
-                        <p>Perbaikan mesin cuci top loading, front loading, 1 tabung, dan 2 tabung dari berbagai merek.</p>
-                        <a href="#" class="learn-more">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="service-content">
-                        <h4>Service Water Heater</h4>
-                        <p>Perbaikan water heater listrik dan gas, termasuk pemeriksaan keamanan dan penggantian komponen.</p>
-                        <a href="#" class="learn-more">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-body">
+                        <h3>Service Kulkas</h3>
+                        <p>Perbaikan kulkas 1 pintu, 2 pintu, side by side &mdash; masalah tidak dingin, beku
+                            berlebihan, kompresor rusak.</p>
+                        <div class="service-tags">
+                            <span class="tag">Tidak Dingin</span>
+                            <span class="tag">Berbunyi</span>
+                            <span class="tag">Beku Berlebih</span>
+                        </div>
                     </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tv"></i>
+                <div class="service-card reveal d3">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&auto=format&fit=crop&q=80"
+                            alt="Service Mesin Cuci Washing Machine" loading="lazy">
+                        <div class="service-img-overlay"></div>
+                        <div class="service-icon-badge"><i class="fas fa-rotate"></i></div>
                     </div>
-                    <div class="service-content">
-                        <h4>Service TV</h4>
-                        <p>Perbaikan TV LED, LCD, Plasma, dan CRT untuk semua ukuran dan merek terkenal.</p>
-                        <a href="#" class="learn-more">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-body">
+                        <h3>Service Mesin Cuci</h3>
+                        <p>Perbaikan mesin cuci top loading, front loading, 1 tabung, dan 2 tabung dari berbagai merek
+                            populer.</p>
+                        <div class="service-tags">
+                            <span class="tag">Tidak Muter</span>
+                            <span class="tag">Bocor</span>
+                            <span class="tag">Berisik</span>
+                        </div>
                     </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-plug"></i>
+                <div class="service-card reveal d1">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=800&auto=format&fit=crop&q=80"
+                            alt="Service Water Heater Shower" loading="lazy">
+                        <div class="service-img-overlay"></div>
+                        <div class="service-icon-badge"><i class="fas fa-fire-flame-curved"></i></div>
                     </div>
-                    <div class="service-content">
-                        <h4>Lainnya</h4>
-                        <p>Perbaikan berbagai perangkat elektronik rumah tangga lainnya seperti microwave, blender, mixer, dll.</p>
-                        <a href="#" class="learn-more">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-body">
+                        <h3>Service Water Heater</h3>
+                        <p>Perbaikan water heater listrik dan gas, pemeriksaan keamanan, dan penggantian komponen
+                            bermasalah.</p>
+                        <div class="service-tags">
+                            <span class="tag">Listrik</span>
+                            <span class="tag">Gas</span>
+                            <span class="tag">Solar Heater</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card reveal d2">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&auto=format&fit=crop&q=80"
+                            alt="Service TV Smart Television" loading="lazy">
+                        <div class="service-img-overlay"></div>
+                        <div class="service-icon-badge"><i class="fas fa-tv"></i></div>
+                    </div>
+                    <div class="service-body">
+                        <h3>Service TV</h3>
+                        <p>Perbaikan TV LED, LCD, Plasma, dan Smart TV dari semua ukuran dan merek. Layar gelap? Kami
+                            solusinya.</p>
+                        <div class="service-tags">
+                            <span class="tag">LED / LCD</span>
+                            <span class="tag">Smart TV</span>
+                            <span class="tag">No Signal</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card reveal d3">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80"
+                            alt="Elektronik Lainnya Repairs" loading="lazy">
+                        <div class="service-img-overlay"></div>
+                        <div class="service-icon-badge"><i class="fas fa-plug-circle-bolt"></i></div>
+                    </div>
+                    <div class="service-body">
+                        <h3>Elektronik Lainnya</h3>
+                        <p>Microwave, dispenser, blender, mixer, pompa air, dan berbagai perangkat elektronik rumah
+                            tangga lainnya.</p>
+                        <div class="service-tags">
+                            <span class="tag">Microwave</span>
+                            <span class="tag">Dispenser</span>
+                            <span class="tag">Pompa Air</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- ══ ABOUT ══ -->
     <section class="about" id="about">
         <div class="container">
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpVCeSkWJY7Shbee6zuHyp-EGDBgoVE_gO8t-2ZUzYF8TfCF80v773zP2h580AOgtBXnClhUMpQtjsu2WEWNlKGucU2YRS9TUYWWDfFznc15V7NahU8TwMVozAssiyZ6eGPMuUEdybFM-MklzddQ5GP_BkgBBq6B5EJcRwHsIvlL4OwA-32y6ClDpyeg/s16000-rw/service-mesin-cuci-merk-hitachi-surabaya.jpeg" alt="Tim Gemilang Teknik Service">
+            <div class="about-wrap">
+                <div class="about-visual reveal-left">
+                    <div class="about-dots"></div>
+                    <div class="about-img-main">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=800&auto=format&fit=crop&q=80"
+                            alt="Teknisi Gemilang Teknik Service sedang mendiagnosa perangkat elektronik"
+                            loading="lazy">
+                    </div>
+                    <div class="about-float">
+                        <div class="af-num">10+</div>
+                        <div class="af-lbl">Tahun<br>Berpengalaman</div>
+                    </div>
                 </div>
-                <div class="about-text">
-                    <h3>Mengapa Memilih Kami?</h3>
-                    <p>Gemilang Teknik Service telah berpengalaman lebih dari 10 tahun dalam bidang service elektronik rumah tangga. Kami berkomitmen untuk memberikan layanan terbaik dengan harga terjangkau.</p>
-                    <div class="features">
+                <div class="about-text reveal-right">
+                    <div class="section-eyebrow">Mengapa Kami?</div>
+                    <h2>Dipercaya Ribuan <span class="gradient-text">Pelanggan</span> Sejak 2014</h2>
+                    <p>Gemilang Teknik Service hadir dengan teknisi bersertifikat, peralatan modern, dan komitmen penuh
+                        untuk memberikan hasil terbaik &mdash; bukan sekadar perbaikan sementara.</p>
+                    <div class="feature-list">
                         <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Teknisi Profesional</h4>
-                                <p>Teknisi kami bersertifikat dan berpengalaman dalam menangani berbagai masalah elektronik.</p>
+                            <div class="feat-icon fi-blue"><i class="fas fa-user-graduate"></i></div>
+                            <div class="feat-text">
+                                <h4>Teknisi Bersertifikat</h4>
+                                <p>Tim kami terlatih dan tersertifikasi untuk menangani berbagai jenis kerusakan
+                                    elektronik.</p>
                             </div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Garansi Resmi</h4>
-                                <p>Kami memberikan garansi untuk setiap perbaikan yang kami lakukan.</p>
+                            <div class="feat-icon fi-cyan"><i class="fas fa-shield-halved"></i></div>
+                            <div class="feat-text">
+                                <h4>Garansi Service Resmi</h4>
+                                <p>Setiap perbaikan dijamin dengan garansi, sehingga Anda bisa tenang tanpa khawatir.
+                                </p>
                             </div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <div class="feature-text">
+                            <div class="feat-icon fi-purple"><i class="fas fa-screwdriver-wrench"></i></div>
+                            <div class="feat-text">
                                 <h4>Sparepart Original</h4>
-                                <p>Kami hanya menggunakan sparepart original atau berkualitas tinggi untuk perbaikan.</p>
+                                <p>Kami hanya menggunakan sparepart asli atau berkualitas tinggi agar perangkat tahan
+                                    lama.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feat-icon fi-gold"><i class="fas fa-receipt"></i></div>
+                            <div class="feat-text">
+                                <h4>Harga Transparan</h4>
+                                <p>Estimasi harga diberikan sebelum perbaikan dimulai &mdash; tidak ada biaya
+                                    tersembunyi.</p>
                             </div>
                         </div>
                     </div>
@@ -743,53 +2787,145 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- ══ HOW IT WORKS ══ -->
+    <section class="how" id="how">
+        <div class="container">
+            <div class="section-title reveal">
+                <div class="section-eyebrow">Cara Kerja</div>
+                <h2>Proses Servis yang <span class="gradient-text">Mudah &amp; Cepat</span></h2>
+                <p>Hanya 4 langkah mudah untuk mendapatkan perangkat elektronik Anda kembali normal.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card reveal d1">
+                    <div class="step-num">Langkah 01</div>
+                    <div class="step-icon-wrap"><i class="fab fa-whatsapp"></i></div>
+                    <h3>Hubungi Kami</h3>
+                    <p>Chat atau telepon via WhatsApp, ceritakan kerusakan perangkat Anda kepada kami.</p>
+                </div>
+                <div class="step-card reveal d2">
+                    <div class="step-num">Langkah 02</div>
+                    <div class="step-icon-wrap"><i class="fas fa-calendar-check"></i></div>
+                    <h3>Buat Jadwal</h3>
+                    <p>Tentukan jadwal dan lokasi yang nyaman bagi Anda &mdash; kami yang datang ke tempat Anda.</p>
+                </div>
+                <div class="step-card reveal d3">
+                    <div class="step-num">Langkah 03</div>
+                    <div class="step-icon-wrap"><i class="fas fa-magnifying-glass-plus"></i></div>
+                    <h3>Diagnosa &amp; Estimasi</h3>
+                    <p>Teknisi kami mendiagnosa kerusakan dan memberikan estimasi biaya sebelum perbaikan dimulai.</p>
+                </div>
+                <div class="step-card reveal d4">
+                    <div class="step-num">Langkah 04</div>
+                    <div class="step-icon-wrap"><i class="fas fa-circle-check"></i></div>
+                    <h3>Selesai &amp; Garansi</h3>
+                    <p>Perangkat diperbaiki, Anda mendapatkan garansi service. Beres! Mudah dan terpercaya.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ TESTIMONIALS ══ -->
     <section class="testimonials" id="testimonials">
         <div class="container">
-            <div class="section-title">
-                <h3>Apa Kata Pelanggan Kami</h3>
-                <p>Testimoni dari pelanggan yang telah menggunakan layanan kami</p>
+            <div class="section-title reveal">
+                <div class="section-eyebrow">Testimoni</div>
+                <h2>Apa Kata <span class="gradient-text">Pelanggan</span> Kami?</h2>
+                <p>Lebih dari 5.000 pelanggan puas telah mempercayakan perbaikan elektronik mereka kepada kami.</p>
             </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>AC saya tidak dingin lagi, teknisi Gemilang Teknik Service datang tepat waktu dan memperbaikinya dengan cepat. Sekarang AC dingin seperti baru lagi. Terima kasih!</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://cdn.prod.website-files.com/606e3b73301630008098f7f0/614295203f913e42b8ff4520_capsule-video-testimonial-tips-header.jpg" alt="Budi Santoso">
-                        </div>
-                        <div class="author-info">
-                            <h5>Budi Santoso</h5>
-                            <p>Jakarta Selatan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>Mesin cuci saya bocor dan berisik. Setelah diperbaiki oleh Gemilang Teknik Service, mesin cuci berfungsi normal kembali. Pelayanannya sangat memuaskan.</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://cdn.prod.website-files.com/606e3b73301630008098f7f0/614295203f913e42b8ff4520_capsule-video-testimonial-tips-header.jpg" alt="Ani Wijaya">
-                        </div>
-                        <div class="author-info">
-                            <h5>Ani Wijaya</h5>
-                            <p>Tangerang</p>
+            <div class="testi-grid">
+                <div class="testi-card reveal d1">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testi-text">"AC saya tidak dingin sudah 2 minggu. Setelah hubungi Gemilang Teknik,
+                        teknisinya langsung datang besok paginya. Cepat, profesional, dan AC langsung dingin lagi. Puas
+                        banget!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80"
+                                alt="Budi Santoso" loading="lazy"></div>
+                        <div>
+                            <div class="author-name">Budi Santoso</div>
+                            <div class="author-loc"><i class="fas fa-map-pin"></i> Jakarta Selatan</div>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>Kulkas saya tidak dingin dan mengeluarkan suara aneh. Teknisi Gemilang Teknik Service sangat profesional dan menjelaskan masalahnya dengan jelas. Sekarang kulkas berfungsi dengan baik.</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://cdn.prod.website-files.com/606e3b73301630008098f7f0/614295203f913e42b8ff4520_capsule-video-testimonial-tips-header.jpg" alt="Rudi Hermawan">
+                <div class="testi-card reveal d2">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testi-text">"Mesin cuci saya bocor dan berisik banget. Teknisi dari Gemilang Teknik sangat
+                        ramah dan detail menjelaskan masalahnya. Harganya juga masuk akal, tidak kemahalan.
+                        Recommended!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img
+                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80"
+                                alt="Ani Wijaya" loading="lazy"></div>
+                        <div>
+                            <div class="author-name">Ani Wijaya</div>
+                            <div class="author-loc"><i class="fas fa-map-pin"></i> Tangerang</div>
                         </div>
-                        <div class="author-info">
-                            <h5>Rudi Hermawan</h5>
-                            <p>Bekasi</p>
+                    </div>
+                </div>
+                <div class="testi-card reveal d3">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-stroke"></i>
+                    </div>
+                    <p class="testi-text">"Kulkas saya tidak dingin dan ada suara aneh. Setelah diperbaiki oleh tim
+                        Gemilang Teknik, masalahnya beres sepenuhnya. Sudah 3 bulan dan belum ada masalah lagi. Keren!"
+                    </p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80"
+                                alt="Rudi Hermawan" loading="lazy"></div>
+                        <div>
+                            <div class="author-name">Rudi Hermawan</div>
+                            <div class="author-loc"><i class="fas fa-map-pin"></i> Bekasi</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal d1">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testi-text">"Water heater saya tiba-tiba mati total. Tim Gemilang Teknik cepat respons dan
+                        selesai dalam waktu kurang dari 1 jam. Pelayanannya top, harga bersahabat. Sudah 2 kali pakai
+                        jasanya!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img
+                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80"
+                                alt="Sari Dewi" loading="lazy"></div>
+                        <div>
+                            <div class="author-name">Sari Dewi</div>
+                            <div class="author-loc"><i class="fas fa-map-pin"></i> Depok</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal d2">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testi-text">"TV LED saya layarnya gelap tapi suara masih ada. Teknisi datang tepat waktu,
+                        langsung ketemu masalahnya, dan diperbaiki dengan rapi. Sangat puas dengan hasilnya!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80"
+                                alt="Eko Prasetyo" loading="lazy"></div>
+                        <div>
+                            <div class="author-name">Eko Prasetyo</div>
+                            <div class="author-loc"><i class="fas fa-map-pin"></i> Bogor</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal d3">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testi-text">"Microwave mati total dan saya pikir harus beli baru. Ternyata bisa diperbaiki
+                        dan harganya jauh lebih murah dari beli baru. Gemilang Teknik saved the day! Terima kasih
+                        banyak."</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar"><img
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80"
+                                alt="Maya Lestari" loading="lazy"></div>
+                        <div>
+                            <div class="author-name">Maya Lestari</div>
+                            <div class="author-loc"><i class="fas fa-map-pin"></i> Ciputat</div>
                         </div>
                     </div>
                 </div>
@@ -797,101 +2933,193 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="contact">
+    <!-- ══ CTA ══ -->
+    <section class="cta-section" id="contact">
         <div class="container">
-            <h3>Siap Memperbaiki Perangkat Elektronik Anda?</h3>
-            <p>Hubungi kami sekarang untuk mendapatkan layanan terbaik dari teknisi profesional kami.</p>
-            <a aria-label="Chat on WhatsApp" target="_blank" href="https://wa.me/6285102805321?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20memperbaiki%20perangkat%20elektronik%20saya"><img style="width: 50%; height: 50%;" alt="Chat on WhatsApp" src="WhatsAppButtonGreenLarge.png"/></a>
+            <div class="cta-box reveal">
+                <div class="cta-blob-1"></div>
+                <div class="cta-blob-2"></div>
+                <div class="cta-content">
+                    <div class="section-eyebrow" style="justify-content:center;">Siap Mulai?</div>
+                    <h2>Perangkat Rusak? <span class="gradient-text">Kami Siap Bantu!</span></h2>
+                    <p>Jangan biarkan perangkat elektronik yang rusak mengganggu kenyamanan hidup Anda. Hubungi kami
+                        sekarang dan dapatkan solusi cepat dari teknisi profesional kami.</p>
+                    <div class="cta-buttons">
+                        <a href="https://wa.me/6285102805321?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20memperbaiki%20perangkat%20elektronik%20saya"
+                            target="_blank" class="btn btn-wa">
+                            <i class="fab fa-whatsapp"></i> Chat WhatsApp Sekarang
+                        </a>
+                        <a href="tel:6285102805321" class="btn btn-phone">
+                            <i class="fas fa-phone"></i> 0851-0280-5321
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ══ FOOTER ══ -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h4>Gemilang Teknik Service</h4>
-                    <p>Perusahaan service elektronik profesional yang menyediakan layanan perbaikan untuk berbagai perangkat elektronik rumah tangga.</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#home" class="logo" style="margin-bottom:18px;display:inline-flex;">
+                        <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="logo-text" style="margin-left:10px;">
+                            <div class="logo-line1">Gemilang Teknik</div>
+                            <div class="logo-line2">Service Elektronik</div>
+                        </div>
+                    </a>
+                    <p style="margin-top:14px;">Jasa service elektronik rumah tangga profesional dan terpercaya di Depok
+                        dan sekitarnya sejak 2014.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/6285102805321"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6285102805321" target="_blank" aria-label="WhatsApp"><i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
-                <div class="footer-column">
+                <div class="footer-col">
                     <h4>Layanan</h4>
                     <ul>
-                        <li><a href="#">Service AC</a></li>
-                        <li><a href="#">Service Kulkas</a></li>
-                        <li><a href="#">Service Mesin Cuci</a></li>
-                        <li><a href="#">Service Water Heater</a></li>
-                        <li><a href="#">Service TV</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Service AC</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Service Kulkas</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Service Mesin Cuci</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Service Water Heater</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Service TV</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Elektronik Lainnya</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-col">
                     <h4>Perusahaan</h4>
                     <ul>
-                        <li><a href="#">Tentang Kami</a></li>
-                        <li><a href="#">Tim Kami</a></li>
-                        <li><a href="#">Karir</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
+                        <li><a href="#how"><i class="fas fa-chevron-right"></i> Cara Kerja</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimoni</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Hubungi Kami</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-col">
                     <h4>Kontak</h4>
-                    <div class="contact-info">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <a style="text-decoration: none; color: white;" target="_blank" href="https://maps.app.goo.gl/XLc12q7K4Pt9jeU17">Jalan Cisadane V, No. 101B, Abadijaya, Sukmajaya, Kota Depok, Jawa Barat</a>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="https://maps.app.goo.gl/XLc12q7K4Pt9jeU17" target="_blank">Jl. Cisadane V No. 101B,
+                            Abadijaya, Sukmajaya, Kota Depok, Jawa Barat</a>
                     </div>
-                    <div class="contact-info">
-                        <i class="fas fa-phone-alt contact-icon"></i>
-                        <a style="color: white; text-decoration: none;" href="tel:6285102805321">0851-0280-5321</a>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:6285102805321">0851-0280-5321</a>
                     </div>
-                    <div class="contact-info">
-                        <i class="fas fa-envelope contact-icon"></i>
-                        <a style="text-decoration: none; color: white;" href="mailto:ramlypadang060977@gmail">ramlypadang060977@gmail.com</a>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:ramlypadang060977@gmail.com">ramlypadang060977@gmail.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Senin &ndash; Sabtu: 08.00 &ndash; 18.00 WIB</span>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Gemilang Teknik Service. All Rights Reserved.</p>
+                <p>&copy; 2025 <span>Gemilang Teknik Service</span>. All Rights Reserved.</p>
+                <p>Dibuat dengan <span>&#9829;</span> untuk pelanggan setia kami</p>
             </div>
         </div>
     </footer>
 
+    <!-- ══ FLOATING BUTTONS ══ -->
+    <a href="https://wa.me/6285102805321?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20memperbaiki%20perangkat%20elektronik%20saya"
+        target="_blank" class="float-wa" aria-label="Chat WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="float-wa-label">Chat Kami</span>
+    </a>
+    <button class="back-top" id="back-top" aria-label="Kembali ke atas">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobile-menu').addEventListener('click', function() {
-            document.getElementById('nav-links').classList.toggle('active');
+        /* ── THEME ── */
+        const html = document.documentElement;
+        const saved = localStorage.getItem('gts-theme') || 'dark';
+        html.setAttribute('data-theme', saved);
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('gts-theme', next);
         });
-        
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-links a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('nav-links').classList.remove('active');
-            });
+
+        /* ── HEADER SCROLL ── */
+        const hdr = document.getElementById('site-header');
+        window.addEventListener('scroll', () => {
+            hdr.classList.toggle('scrolled', window.scrollY > 30);
+        }, { passive: true });
+
+        /* ── ANIMATED HAMBURGER MOBILE MENU (works with click AND keyboard) ── */
+        const mBtn = document.getElementById('mobile-menu');
+        const navEl = document.getElementById('nav-links');
+        const toggleNav = (force) => {
+            const open = navEl.classList.contains('open');
+            if (force === 'close' || open) {
+                navEl.classList.remove('open');
+                mBtn.classList.remove('active');
+                mBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                navEl.classList.add('open');
+                mBtn.classList.add('active');
+                mBtn.setAttribute('aria-expanded', 'true');
+            }
+        };
+        mBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleNav();
         });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        mBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                toggleNav();
+            }
+        });
+        navEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleNav('close')));
+        document.addEventListener('click', e => {
+            if (!navEl.contains(e.target) && !mBtn.contains(e.target)) toggleNav('close');
+        });
+
+        /* ── SMOOTH SCROLL ── */
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                const t = document.querySelector(href);
+                if (t) {
+                    e.preventDefault();
+                    const off = window.innerWidth < 768 ? 76 : 80;
+                    window.scrollTo({ top: t.offsetTop - off, behavior: 'smooth' });
                 }
             });
         });
+
+        /* ── REVEAL ON SCROLL ── */
+        const revEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        const revObs = new IntersectionObserver(entries => {
+            entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revEls.forEach(el => revObs.observe(el));
+
+        /* ── BACK TO TOP ── */
+        const btBtn = document.getElementById('back-top');
+        window.addEventListener('scroll', () => {
+            btBtn.classList.toggle('show', window.scrollY > 400);
+        }, { passive: true });
+        btBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        /* ── TAP TO PAUSE MARQUEES (helps anyone who wants to actually read
+           the scrolling text instead of it running by — common ask from
+           older users) ── */
+        document.querySelectorAll('.trust-track, .brands-track').forEach(track => {
+            track.addEventListener('click', () => track.classList.toggle('paused'));
+        });
     </script>
 </body>
+
 </html>
