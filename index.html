@@ -49,9 +49,6 @@
             --tap-min: 46px;
         }
 
-        /* ═══════════════════════════════════
-           RESET & BASE
-        ═══════════════════════════════════ */
         *,
         *::before,
         *::after {
@@ -133,9 +130,6 @@
             }
         }
 
-        /* ═══════════════════════════════════
-           UTILITIES
-        ═══════════════════════════════════ */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -267,9 +261,6 @@
             line-height: 1.75;
         }
 
-        /* ═══════════════════════════════════
-           REVEAL ANIMATIONS
-        ═══════════════════════════════════ */
         .reveal {
             opacity: 0;
             transform: translateY(22px);
@@ -323,9 +314,6 @@
             transition-delay: .3s;
         }
 
-        /* ═══════════════════════════════════
-           HEADER & NAV
-        ═══════════════════════════════════ */
         header {
             position: fixed;
             top: 0;
@@ -377,12 +365,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 0;
+            padding: 12px 0;
             transition: padding var(--transition);
         }
 
         header.scrolled nav {
-            padding: 11px 0;
+            padding: 8px 0;
         }
 
         /* Logo */
@@ -392,44 +380,21 @@
             gap: 11px;
         }
 
-        .logo-icon {
-            width: 44px;
+        .logo-img {
+            height: 52px;
+            width: auto;
+            display: block;
+            transition: transform var(--transition), height var(--transition);
+        }
+
+        header.scrolled .logo-img {
             height: 44px;
-            border-radius: var(--radius-sm);
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 19px;
-            color: white;
-            flex-shrink: 0;
-            transition: transform var(--transition);
         }
 
-        .logo:hover .logo-icon {
-            transform: scale(1.06);
+        .logo:hover .logo-img {
+            transform: scale(1.04);
         }
 
-        .logo-text {
-            line-height: 1.25;
-        }
-
-        .logo-line1 {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text);
-            font-family: 'Lexend', sans-serif;
-        }
-
-        .logo-line2 {
-            font-size: 11.5px;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Nav links */
         .nav-links {
             display: flex;
             align-items: center;
@@ -475,9 +440,6 @@
             gap: 10px;
         }
 
-        /* ═══════════════════════════════════
-           ANIMATED HAMBURGER BUTTON
-        ═══════════════════════════════════ */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -525,16 +487,13 @@
             background-color: var(--primary);
         }
 
-        /* ═══════════════════════════════════
-           HERO
-        ═══════════════════════════════════ */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding-top: 132px;
+            padding-top: 108px;
             padding-bottom: 48px;
             background: var(--bg-2);
         }
@@ -570,6 +529,15 @@
         }
 
         .hero-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
@@ -577,15 +545,6 @@
 
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .hero-grid {
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 48px;
-            align-items: center;
         }
 
         .hero-content {
@@ -719,7 +678,6 @@
             background: var(--border-2);
         }
 
-        /* Hero visual card */
         .hero-visual {
             position: relative;
             z-index: 2;
@@ -786,7 +744,6 @@
             color: var(--text-muted);
         }
 
-        /* Scroll hint */
         .scroll-hint {
             position: absolute;
             bottom: 28px;
@@ -846,9 +803,6 @@
             }
         }
 
-        /* ═══════════════════════════════════
-           TRUST TICKER BAR
-        ═══════════════════════════════════ */
         .trust-bar {
             background: var(--primary);
             padding: 16px 0;
@@ -893,9 +847,6 @@
             color: #fff;
         }
 
-        /* ═══════════════════════════════════
-           BRAND LOGOS SECTION
-        ═══════════════════════════════════ */
         .brands-section {
             padding: 52px 0;
             background: #fff;
@@ -992,9 +943,6 @@
             opacity: 1;
         }
 
-        /* ═══════════════════════════════════
-           SERVICES
-        ═══════════════════════════════════ */
         .services {
             background: var(--bg);
         }
@@ -1097,9 +1045,6 @@
             border-color: var(--primary);
         }
 
-        /* ═══════════════════════════════════
-           ABOUT
-        ═══════════════════════════════════ */
         .about {
             background: var(--bg-2);
         }
@@ -1224,9 +1169,6 @@
             line-height: 1.65;
         }
 
-        /* ═══════════════════════════════════
-           GALLERY
-        ═══════════════════════════════════ */
         .gallery {
             background: #fff;
         }
@@ -1317,7 +1259,6 @@
             transform: scale(1);
         }
 
-        /* Placeholder shown automatically if an image file hasn't been added yet */
         .gallery-item.g-empty {
             display: flex;
             flex-direction: column;
@@ -1361,7 +1302,6 @@
             margin-top: 34px;
         }
 
-        /* Lightbox */
         .lightbox {
             position: fixed;
             inset: 0;
@@ -1459,9 +1399,6 @@
             right: -60px;
         }
 
-        /* ═══════════════════════════════════
-           HOW IT WORKS
-        ═══════════════════════════════════ */
         .how {
             background: var(--bg);
         }
@@ -1541,9 +1478,6 @@
             line-height: 1.7;
         }
 
-        /* ═══════════════════════════════════
-           TESTIMONIALS
-        ═══════════════════════════════════ */
         .testimonials {
             background: var(--bg-2);
         }
@@ -1626,9 +1560,100 @@
             margin-right: 3px;
         }
 
-        /* ═══════════════════════════════════
-           CTA
-        ═══════════════════════════════════ */
+        .location {
+            background: var(--bg-2);
+        }
+
+        .location-wrap {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .location-map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 6px solid #fff;
+            box-shadow: var(--shadow);
+            min-height: 380px;
+            background: var(--bg-3);
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 380px;
+            display: block;
+        }
+
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .location-address-card,
+        .location-areas {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px;
+        }
+
+        .location-address-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .location-address-card p {
+            color: var(--text-muted);
+            font-size: 14.5px;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .location-btn {
+            width: 100%;
+        }
+
+        .location-areas h4 {
+            font-size: 15.5px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .area-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .area-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--bg-2);
+            border: 1px solid var(--border-2);
+            padding: 9px 16px;
+            border-radius: 100px;
+            transition: all var(--transition);
+        }
+
+        .area-chip i {
+            font-size: 11px;
+        }
+
+        .area-chip:hover {
+            background: var(--bg-3);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
         .cta-section {
             background: var(--bg);
             padding: 96px 0;
@@ -1703,9 +1728,6 @@
             box-shadow: 0 6px 0 #0f7a35;
         }
 
-        /* ═══════════════════════════════════
-           FOOTER
-        ═══════════════════════════════════ */
         footer {
             background: #1c1512;
             padding: 68px 0 0;
@@ -1787,6 +1809,12 @@
             color: #fff;
         }
 
+        .footer-logo-img {
+            height: 56px;
+            width: auto;
+            display: block;
+        }
+
         .social-links {
             display: flex;
             gap: 9px;
@@ -1832,9 +1860,6 @@
             color: var(--primary-light);
         }
 
-        /* ═══════════════════════════════════
-           FLOATING BUTTONS
-        ═══════════════════════════════════ */
         .float-wa {
             position: fixed;
             bottom: 28px;
@@ -1910,9 +1935,11 @@
             color: white;
         }
 
-        /* ═══════════════════════════════════
-           RESPONSIVE SYSTEM
-        ═══════════════════════════════════ */
+        /* ── TABLET LANDSCAPE / SMALL LAPTOP (≤1100px) ──
+           7 nav links + CTA no longer fit next to the logo at this width,
+           so the nav switches to a hamburger here — same breakpoint where
+           the hero/services grids also start stacking, keeping the whole
+           header/hero region consistent instead of collapsing piecemeal. */
         @media(max-width:1100px) {
             section {
                 padding: 76px 0;
@@ -1988,8 +2015,60 @@
                 grid-template-columns: 1.2fr 1fr 1fr;
                 gap: 32px;
             }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 1px);
+                left: 0;
+                right: 0;
+                background: #fff;
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 12px 20px 18px;
+                gap: 2px;
+                box-shadow: var(--shadow);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+                pointer-events: none;
+                max-height: calc(100svh - 90px);
+                overflow-y: auto;
+            }
+
+            .nav-links.open {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                width: 100%;
+                border-radius: var(--radius-xs);
+                padding: 14px 16px;
+                font-size: 15.5px;
+                min-height: 48px;
+            }
+
+            .nav-cta {
+                text-align: center;
+                justify-content: center;
+                margin-top: 8px;
+                font-size: 15.5px !important;
+            }
         }
 
+        /* ── TABLET PORTRAIT (≤1024px) ── */
         @media(max-width:1024px) {
             .about-wrap {
                 grid-template-columns: 1fr;
@@ -2023,6 +2102,19 @@
             .cta-box {
                 padding: 56px 32px;
             }
+
+            .location-wrap {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .location-map {
+                min-height: 320px;
+            }
+
+            .location-map iframe {
+                min-height: 320px;
+            }
         }
 
         @media(max-width:900px) and (min-width:769px) {
@@ -2033,11 +2125,6 @@
             .btn {
                 padding: 15px 26px;
                 font-size: 15.5px;
-            }
-
-            .nav-links a {
-                padding: 10px 13px;
-                font-size: 14.5px;
             }
         }
 
@@ -2059,7 +2146,7 @@
             }
 
             .hero {
-                padding-top: 128px;
+                padding-top: 96px;
                 min-height: auto;
             }
 
@@ -2100,54 +2187,18 @@
                 font-size: 15.5px;
             }
 
-            .menu-toggle {
-                display: flex;
+            .logo-img {
+                height: 42px;
             }
 
-            .nav-links {
-                position: absolute;
-                top: calc(100% + 1px);
-                left: 0;
-                right: 0;
-                background: #fff;
-                border-bottom: 1px solid var(--border);
-                flex-direction: column;
-                padding: 12px 20px 18px;
-                gap: 2px;
-                box-shadow: var(--shadow);
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-10px);
-                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-                pointer-events: none;
-                max-height: calc(100svh - 100px);
-                overflow-y: auto;
-            }
-
-            .nav-links.open {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-                pointer-events: auto;
-            }
-
-            .nav-links li {
-                width: 100%;
+            header.scrolled .logo-img {
+                height: 38px;
             }
 
             .nav-links a {
-                width: 100%;
-                border-radius: var(--radius-xs);
                 padding: 15px 16px;
                 font-size: 16px;
                 min-height: 52px;
-            }
-
-            .nav-cta {
-                text-align: center;
-                justify-content: center;
-                margin-top: 8px;
-                font-size: 16px !important;
             }
 
             .hero-stats {
@@ -2306,6 +2357,19 @@
                 font-size: 15.5px;
             }
 
+            .location-map {
+                min-height: 260px;
+            }
+
+            .location-map iframe {
+                min-height: 260px;
+            }
+
+            .location-address-card,
+            .location-areas {
+                padding: 20px;
+            }
+
             .cta-buttons {
                 flex-direction: column;
                 gap: 12px;
@@ -2397,12 +2461,12 @@
                 border-radius: 50%;
             }
 
-            .logo-line1 {
-                font-size: 16px;
+            .logo-img {
+                height: 36px;
             }
 
-            .logo-line2 {
-                font-size: 10.5px;
+            header.scrolled .logo-img {
+                height: 32px;
             }
         }
 
@@ -2458,7 +2522,6 @@
         }
     </style>
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gemilang-teknik-service.vercel.app/">
     <meta property="og:title" content="Gemilang Teknik Service">
@@ -2466,7 +2529,6 @@
         content="Jasa Service Elektronik Panggilan • AC • Kulkas • Mesin Cuci • TV • Water Heater • Bergaransi">
     <meta property="og:image" content="https://gemilang-teknik-service.vercel.app/og-image.png">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gemilang Teknik Service">
     <meta name="twitter:description" content="Jasa Service Elektronik Panggilan Bergaransi">
@@ -2475,7 +2537,6 @@
 
 <body>
 
-    <!-- ══ HEADER ══ -->
     <header id="site-header">
         <div class="topbar">
             <div class="container">
@@ -2488,11 +2549,7 @@
         <div class="container">
             <nav>
                 <a href="#home" class="logo">
-                    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
-                    <div class="logo-text">
-                        <div class="logo-line1">Gemilang Teknik</div>
-                        <div class="logo-line2">Service Elektronik</div>
-                    </div>
+                    <img src="logo.png" alt="Gemilang Teknik Service" class="logo-img">
                 </a>
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#home">Beranda</a></li>
@@ -2501,6 +2558,7 @@
                     <li><a href="#about">Tentang</a></li>
                     <li><a href="#how">Cara Kerja</a></li>
                     <li><a href="#testimonials">Testimoni</a></li>
+                    <li><a href="#lokasi">Lokasi</a></li>
                     <li><a href="https://wa.me/6285355836128?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20konsultasi"
                             target="_blank" class="nav-cta">Hubungi Kami</a></li>
                 </ul>
@@ -2516,7 +2574,6 @@
         </div>
     </header>
 
-    <!-- ══ HERO ══ -->
     <section class="hero" id="home">
         <div class="hero-grid">
             <div class="hero-content">
@@ -2526,8 +2583,8 @@
                 </div>
                 <h1>Elektronik Rumah Rusak?<br><span>Kami Datang, Beres!</span></h1>
                 <p>Tenang, Ayah &amp; Bunda &mdash; AC, kulkas, mesin cuci, water heater, sampai TV di rumah bisa
-                    ditangani teknisi bersertifikat kami. Datang ke lokasi, harga jelas dari awal, dan bergaransi
-                    resmi.</p>
+                    ditangani teknisi bersertifikat kami. Datang ke lokasi, harga jelas dari awal, dan bergaransi resmi.
+                </p>
                 <div class="hero-buttons">
                     <a href="https://wa.me/6285355836128?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20memperbaiki%20perangkat%20elektronik%20saya"
                         target="_blank" class="btn btn-wa">
@@ -2581,7 +2638,6 @@
         </div>
     </section>
 
-    <!-- ══ TRUST TICKER ══ -->
     <div class="trust-bar">
         <div class="trust-track">
             <div class="trust-item"><i class="fas fa-shield-check"></i> Garansi Service</div>
@@ -2603,7 +2659,6 @@
         </div>
     </div>
 
-    <!-- ══ BRAND LOGOS ══ -->
     <div class="brands-section">
         <p class="brands-label">Kami Melayani Berbagai Merek Ternama</p>
         <div class="brands-marquee-wrap">
@@ -2672,7 +2727,6 @@
         </div>
     </div>
 
-    <!-- ══ SERVICES ══ -->
     <section class="services" id="services">
         <div class="container">
             <div class="section-title reveal">
@@ -2794,7 +2848,6 @@
         </div>
     </section>
 
-    <!-- ══ ABOUT ══ -->
     <section class="about" id="about">
         <div class="container">
             <div class="about-wrap">
@@ -2854,10 +2907,6 @@
         </div>
     </section>
 
-    <!-- ══ GALLERY ══ -->
-    <!-- Ganti masing-masing src="galeri/xx.jpg" dengan foto asli. Nama file & urutan
-         boleh diubah bebas — kalau file belum ada, kotak akan otomatis tampil sebagai
-         placeholder rapi sampai fotonya ditambahkan. -->
     <section class="gallery" id="gallery">
         <div class="container">
             <div class="section-title reveal">
@@ -2909,7 +2958,6 @@
         </div>
     </section>
 
-    <!-- Lightbox untuk pratinjau galeri -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-nav lightbox-prev" id="lb-prev" aria-label="Foto sebelumnya"><i
                 class="fas fa-chevron-left"></i></div>
@@ -2922,7 +2970,6 @@
                 class="fas fa-chevron-right"></i></div>
     </div>
 
-    <!-- ══ HOW IT WORKS ══ -->
     <section class="how" id="how">
         <div class="container">
             <div class="section-title reveal">
@@ -2959,7 +3006,6 @@
         </div>
     </section>
 
-    <!-- ══ TESTIMONIALS ══ -->
     <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-title reveal">
@@ -3068,7 +3114,50 @@
         </div>
     </section>
 
-    <!-- ══ CTA ══ -->
+    <!-- ══ LOKASI & AREA LAYANAN ══ -->
+    <section class="location" id="lokasi">
+        <div class="container">
+            <div class="section-title reveal">
+                <div class="section-eyebrow">Lokasi &amp; Area Layanan</div>
+                <h2>Kami <span class="accent-text">Datang ke Rumah</span> Anda</h2>
+                <p>Berbasis di Depok, teknisi kami siap menjangkau rumah dan kantor Anda di area-area berikut ini.</p>
+            </div>
+            <div class="location-wrap">
+                <div class="location-map reveal-left">
+                    <iframe src="https://www.google.com/maps?q=-6.389889,106.853389&hl=id&z=16&output=embed"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" title="Lokasi Gemilang Teknik Service"></iframe>
+                </div>
+                <div class="location-info reveal-right">
+                    <div class="location-address-card">
+                        <div class="feat-icon" style="margin-bottom:14px;"><i class="fas fa-map-marker-alt"></i></div>
+                        <h4>Gemilang Teknik Service</h4>
+                        <p>Jl. Cisadane V No. 101B, Abadijaya, Sukmajaya, Kota Depok, Jawa Barat</p>
+                        <a href="https://www.google.com/maps?q=-6.389889,106.853389" target="_blank"
+                            class="btn btn-ghost location-btn">
+                            <i class="fas fa-diamond-turn-right"></i> Buka di Google Maps
+                        </a>
+                    </div>
+                    <div class="location-areas">
+                        <h4>Area yang Kami Layani</h4>
+                        <div class="area-list">
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Kota Depok</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Jakarta Timur</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Jakarta Selatan</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Jakarta Pusat</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Jakarta Utara</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Jakarta Barat</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Kota Bekasi</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Kabupaten Bogor</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Kota Bogor</span>
+                            <span class="area-chip"><i class="fas fa-location-dot"></i> Kota Tangerang</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="cta-section" id="contact">
         <div class="container">
             <div class="cta-box reveal">
@@ -3091,17 +3180,12 @@
         </div>
     </section>
 
-    <!-- ══ FOOTER ══ -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
                     <a href="#home" class="logo" style="margin-bottom:18px;display:inline-flex;">
-                        <div class="logo-icon"><i class="fas fa-bolt"></i></div>
-                        <div class="logo-text" style="margin-left:10px;">
-                            <div class="logo-line1" style="color:#fff;">Gemilang Teknik</div>
-                            <div class="logo-line2">Service Elektronik</div>
-                        </div>
+                        <img src="logo.png" alt="Gemilang Teknik Service" class="footer-logo-img">
                     </a>
                     <p style="margin-top:14px;">Jasa service elektronik rumah tangga profesional dan terpercaya di Depok
                         dan sekitarnya sejak 2014.</p>
@@ -3130,6 +3214,7 @@
                         <li><a href="#about"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
                         <li><a href="#how"><i class="fas fa-chevron-right"></i> Cara Kerja</a></li>
                         <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimoni</a></li>
+                        <li><a href="#lokasi"><i class="fas fa-chevron-right"></i> Lokasi</a></li>
                         <li><a href="#contact"><i class="fas fa-chevron-right"></i> Hubungi Kami</a></li>
                     </ul>
                 </div>
@@ -3161,7 +3246,6 @@
         </div>
     </footer>
 
-    <!-- ══ FLOATING BUTTONS ══ -->
     <a href="https://wa.me/6285355836128?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20memperbaiki%20perangkat%20elektronik%20saya"
         target="_blank" class="float-wa" aria-label="Chat WhatsApp">
         <i class="fab fa-whatsapp"></i>
@@ -3172,13 +3256,11 @@
     </button>
 
     <script>
-        /* ── HEADER SCROLL ── */
         const hdr = document.getElementById('site-header');
         window.addEventListener('scroll', () => {
             hdr.classList.toggle('scrolled', window.scrollY > 30);
         }, { passive: true });
 
-        /* ── ANIMATED HAMBURGER MOBILE MENU ── */
         const mBtn = document.getElementById('mobile-menu');
         const navEl = document.getElementById('nav-links');
         const toggleNav = (force) => {
@@ -3208,7 +3290,6 @@
             if (!navEl.contains(e.target) && !mBtn.contains(e.target)) toggleNav('close');
         });
 
-        /* ── SMOOTH SCROLL ── */
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
@@ -3216,32 +3297,28 @@
                 const t = document.querySelector(href);
                 if (t) {
                     e.preventDefault();
-                    const off = window.innerWidth < 768 ? 108 : 112;
+                    const off = window.innerWidth < 768 ? 88 : 96;
                     window.scrollTo({ top: t.offsetTop - off, behavior: 'smooth' });
                 }
             });
         });
 
-        /* ── REVEAL ON SCROLL ── */
         const revEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
         const revObs = new IntersectionObserver(entries => {
             entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
         }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
         revEls.forEach(el => revObs.observe(el));
 
-        /* ── BACK TO TOP ── */
         const btBtn = document.getElementById('back-top');
         window.addEventListener('scroll', () => {
             btBtn.classList.toggle('show', window.scrollY > 400);
         }, { passive: true });
         btBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        /* ── TAP TO PAUSE MARQUEES ── */
         document.querySelectorAll('.trust-track, .brands-track').forEach(track => {
             track.addEventListener('click', () => track.classList.toggle('paused'));
         });
 
-        /* ── GALLERY: auto placeholder for photos not added yet, + lightbox ── */
         const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
         const lightbox = document.getElementById('lightbox');
         const lbImg = document.getElementById('lb-img');
