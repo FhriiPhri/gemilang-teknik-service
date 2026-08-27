@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Form Pemesanan Service – Gemilang Teknik Service</title>
+    <meta name="description"
+        content="Isi form pemesanan service AC, kulkas, mesin cuci, water heater, dan TV. Teknisi bersertifikat, bergaransi, langsung terhubung ke WhatsApp.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Lexend:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-2: #fbf4f2;
+            --bg-3: #f6e9e6;
+            --bg-card: #ffffff;
+            --border: #e7dedb;
+            --border-2: #dcc9c4;
+            --primary: #c1121f;
+            --primary-d: #950e18;
+            --primary-light: #e5383b;
+            --primary-glow: rgba(193, 18, 31, 0.16);
+            --green: #16a34a;
+            --green-glow: rgba(22, 163, 74, 0.14);
+            --text: #1c1512;
+            --text-2: #4a3d38;
+            --text-muted: #7a6a63;
+            --radius-xs: 4px;
+            --radius-sm: 6px;
+            --radius: 8px;
+            --radius-lg: 10px;
+            --radius-xl: 12px;
+            --shadow-sm: 0 2px 10px rgba(28, 12, 8, 0.06);
+            --shadow: 0 10px 30px rgba(28, 12, 8, 0.10);
+            --shadow-lg: 0 22px 54px rgba(28, 12, 8, 0.14);
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --tap-min: 46px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-2);
+            color: var(--text);
+            line-height: 1.65;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Lexend', 'Plus Jakarta Sans', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── MINI HEADER ── */
+        .mini-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mini-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            padding-bottom: 14px;
+            gap: 16px;
+        }
+
+        .mh-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mh-logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .mh-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-2);
+            padding: 10px 16px;
+            border: 1.5px solid var(--border-2);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+        }
+
+        .mh-back:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .mh-call {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        .mh-call i {
+            font-size: 15px;
+        }
+
+        /* ── PAGE HEAD ── */
+        .page-head {
+            padding: 44px 0 8px;
+            text-align: center;
+        }
+
+        .ph-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 12.5px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 14px;
+            padding: 6px 14px;
+            border: 1.5px solid var(--primary);
+            border-radius: 100px;
+            background: #fff;
+        }
+
+        .page-head h1 {
+            font-size: clamp(24px, 3.4vw, 36px);
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+
+        .page-head p {
+            color: var(--text-muted);
+            font-size: 15.5px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ── PROGRESS ── */
+        .progress-wrap {
+            padding: 30px 0 0;
+        }
+
+        .progress-track {
+            max-width: 620px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            position: relative;
+        }
+
+        .progress-track::before {
+            content: '';
+            position: absolute;
+            top: 19px;
+            left: calc(12.5% + 2px);
+            right: calc(12.5% + 2px);
+            height: 2px;
+            background: var(--border-2);
+            z-index: 0;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 19px;
+            left: calc(12.5% + 2px);
+            height: 2px;
+            background: var(--primary);
+            z-index: 1;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .p-step {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .p-dot {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid var(--border-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14.5px;
+            color: var(--text-muted);
+            transition: all var(--transition);
+        }
+
+        .p-step.active .p-dot {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .p-step.done .p-dot {
+            border-color: var(--primary);
+            background: #fff;
+            color: var(--primary);
+        }
+
+        .p-label {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 90px;
+        }
+
+        .p-step.active .p-label {
+            color: var(--primary);
+        }
+
+        /* ── LAYOUT ── */
+        .form-page-wrap {
+            padding: 40px 0 100px;
+        }
+
+        .fp-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* ── CARD ── */
+        .fp-card {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 38px 40px;
+            box-shadow: var(--shadow);
+            min-height: 460px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-panel {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            animation: fadeIn .35s ease;
+        }
+
+        .step-panel.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sp-head {
+            margin-bottom: 26px;
+            padding-bottom: 20px;
+            border-bottom: 1.5px solid var(--border);
+        }
+
+        .sp-head h2 {
+            font-size: 21px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .sp-head p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ── SERVICE PICKER (step 1) ── */
+        .svc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 26px;
+        }
+
+        .svc-opt {
+            position: relative;
+        }
+
+        .svc-opt input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .svc-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+            padding: 20px 12px;
+            border: 1.5px solid var(--border-2);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .svc-card i {
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        .svc-card span {
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+
+        .svc-opt input:checked+.svc-card {
+            border-color: var(--primary);
+            background: var(--bg-2);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .svc-card:hover {
+            border-color: var(--primary);
+        }
+
+        /* ── ISSUE CHIPS (dynamic) ── */
+        .issue-wrap {
+            margin-bottom: 6px;
+        }
+
+        .issue-wrap label.field-label {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .issue-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .issue-chip {
+            position: relative;
+        }
+
+        .issue-chip input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .issue-chip-lbl {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text-2);
+            background: var(--bg-2);
+            border: 1.5px solid var(--border-2);
+            padding: 9px 15px;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .issue-chip-lbl i {
+            font-size: 10px;
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+
+        .issue-chip input:checked+.issue-chip-lbl {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .issue-chip input:checked+.issue-chip-lbl i {
+            opacity: 1;
+        }
+
+        .issue-placeholder {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 12px 0;
+        }
+
+        /* ── FORM ELEMENTS ── */
+        .field-label {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .field-label .req {
+            color: var(--primary);
+            margin-left: 2px;
+        }
+
+        .field-label .opt {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="date"],
+        select,
+        textarea {
+            font-family: inherit;
+            font-size: 15px;
+            color: var(--text);
+            background: var(--bg);
+            border: 1.5px solid var(--border-2);
+            border-radius: var(--radius-sm);
+            padding: 13px 15px;
+            width: 100%;
+            transition: border-color var(--transition), box-shadow var(--transition);
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a6a63' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 38px;
+            cursor: pointer;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 96px;
+            line-height: 1.6;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted);
+            opacity: 0.65;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* radio pills */
+        .pill-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pill-opt {
+            position: relative;
+        }
+
+        .pill-opt input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .pill-lbl {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13.5px;
+            font-weight: 700;
+            padding: 10px 18px;
+            border: 1.5px solid var(--border-2);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: var(--text-2);
+            transition: all var(--transition);
+        }
+
+        .pill-opt input:checked+.pill-lbl {
+            border-color: var(--primary);
+            background: var(--bg-2);
+            color: var(--primary);
+        }
+
+        /* time slot cards */
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .time-opt {
+            position: relative;
+        }
+
+        .time-opt input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .time-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 14px 8px;
+            border: 1.5px solid var(--border-2);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-align: center;
+            transition: all var(--transition);
+        }
+
+        .time-card strong {
+            font-size: 13.5px;
+        }
+
+        .time-card span {
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        .time-opt input:checked+.time-card {
+            border-color: var(--primary);
+            background: var(--bg-2);
+        }
+
+        .time-opt input:checked+.time-card strong {
+            color: var(--primary);
+        }
+
+        /* file upload */
+        .upload-box {
+            border: 1.5px dashed var(--border-2);
+            border-radius: var(--radius);
+            padding: 26px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            background: var(--bg-2);
+        }
+
+        .upload-box:hover {
+            border-color: var(--primary);
+            background: var(--bg-3);
+        }
+
+        .upload-box i {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .upload-box p {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text-2);
+        }
+
+        .upload-box span {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 4px;
+        }
+
+        #of-photo {
+            display: none;
+        }
+
+        .file-list {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .file-chip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-2);
+            background: #fff;
+            border: 1px solid var(--border-2);
+            border-radius: var(--radius-xs);
+            padding: 8px 12px;
+        }
+
+        .file-chip i.fa-xmark {
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .file-chip i.fa-xmark:hover {
+            color: var(--primary);
+        }
+
+        /* ── REVIEW (step 4) ── */
+        .review-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .review-block {
+            background: var(--bg-2);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+        }
+
+        .review-block.full {
+            grid-column: 1 / -1;
+        }
+
+        .review-block h4 {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .review-block p,
+        .review-block div {
+            font-size: 14.5px;
+            color: var(--text-2);
+            line-height: 1.6;
+        }
+
+        .review-empty {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .review-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--green-glow);
+            border: 1.5px solid #86efac;
+            border-radius: var(--radius);
+            font-size: 13.5px;
+            color: #15803d;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .review-note i {
+            font-size: 18px;
+            margin-top: 1px;
+            flex-shrink: 0;
+        }
+
+        /* ── NAV BUTTONS ── */
+        .step-nav {
+            margin-top: auto;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 14px 26px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all var(--transition);
+            min-height: var(--tap-min);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 5px 0 var(--primary-d);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 var(--primary-d);
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--primary-d);
+        }
+
+        .btn-ghost {
+            background: #fff;
+            border: 1.5px solid var(--border-2);
+            color: var(--text-2);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-wa-submit {
+            background: var(--green);
+            color: #fff;
+            box-shadow: 0 5px 0 #0f7a35;
+            font-size: 16px;
+            padding: 15px 30px;
+        }
+
+        .btn-wa-submit i {
+            font-size: 19px;
+        }
+
+        .btn-wa-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #0f7a35;
+        }
+
+        .btn-wa-submit:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #0f7a35;
+        }
+
+        .btn-invisible {
+            visibility: hidden;
+        }
+
+        /* ── SIDEBAR ── */
+        .fp-sidebar {
+            position: sticky;
+            top: 92px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .side-card {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px 22px;
+        }
+
+        .side-card h4 {
+            font-size: 14.5px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .side-card h4 i {
+            color: var(--primary);
+        }
+
+        .side-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .side-item {
+            display: flex;
+            gap: 11px;
+            align-items: flex-start;
+        }
+
+        .side-item i {
+            font-size: 14px;
+            color: var(--primary);
+            margin-top: 3px;
+            flex-shrink: 0;
+            width: 16px;
+        }
+
+        .side-item span {
+            font-size: 13.5px;
+            color: var(--text-2);
+            line-height: 1.55;
+        }
+
+        .side-item strong {
+            display: block;
+            color: var(--text);
+        }
+
+        .side-card.contact {
+            background: var(--primary);
+            border: none;
+        }
+
+        .side-card.contact h4,
+        .side-card.contact .side-item span,
+        .side-card.contact .side-item strong {
+            color: #fff;
+        }
+
+        .side-card.contact .side-item i {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .side-card.contact .btn {
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        /* ── FIELD ERROR ── */
+        .form-group.err input,
+        .form-group.err select,
+        .form-group.err textarea {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .err-msg {
+            display: none;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 6px;
+        }
+
+        .form-group.err .err-msg {
+            display: block;
+        }
+
+        /* ── SUCCESS OVERLAY ── */
+        .success-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 8, 5, 0.55);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s ease, visibility .3s;
+        }
+
+        .success-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-box {
+            background: #fff;
+            border-radius: var(--radius-xl);
+            padding: 44px 38px;
+            max-width: 420px;
+            text-align: center;
+            transform: scale(0.92);
+            transition: transform .3s ease;
+        }
+
+        .success-overlay.open .success-box {
+            transform: scale(1);
+        }
+
+        .success-icon {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: var(--green-glow);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 20px;
+        }
+
+        .success-box h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .success-box p {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        /* ══════════ RESPONSIVE ══════════ */
+        @media (max-width: 1024px) {
+            .fp-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .fp-sidebar {
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .side-card {
+                flex: 1;
+                min-width: 260px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .fp-card {
+                padding: 26px 22px;
+                min-height: 0;
+            }
+
+            .svc-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .time-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .p-label {
+                display: none;
+            }
+
+            .page-head {
+                padding: 30px 0 4px;
+            }
+
+            .mh-back span {
+                display: none;
+            }
+
+            .fp-sidebar {
+                flex-direction: column;
+            }
+
+            .step-nav {
+                flex-wrap: wrap;
+            }
+
+            .step-nav .btn {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .svc-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .svc-card {
+                padding: 16px 8px;
+            }
+
+            .fp-card {
+                padding: 22px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="mini-header">
+        <div class="container">
+            <a href="index.html" class="mh-logo">
+                <img src="logo.png" alt="Gemilang Teknik Service" class="mh-logo-img">
+            </a>
+            <div style="display:flex;align-items:center;gap:14px;">
+                <a class="mh-call" href="tel:6285355836128"><i class="fas fa-phone"></i> 0853-5583-6128</a>
+                <a href="index.html" class="mh-back"><i class="fas fa-arrow-left"></i> <span>Kembali ke
+                        Beranda</span></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-head">
+        <div class="container">
+            <div class="ph-eyebrow">Form Pemesanan</div>
+            <h1>Ceritakan Kebutuhan Service Anda</h1>
+            <p>Isi 4 langkah singkat berikut, teknisi kami akan menerima detail lengkap pesanan Anda langsung via
+                WhatsApp.</p>
+        </div>
+    </div>
+
+    <div class="progress-wrap">
+        <div class="container">
+            <div class="progress-track" id="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+                <div class="p-step active" data-step="1">
+                    <div class="p-dot">1</div>
+                    <div class="p-label">Layanan</div>
+                </div>
+                <div class="p-step" data-step="2">
+                    <div class="p-dot">2</div>
+                    <div class="p-label">Kerusakan</div>
+                </div>
+                <div class="p-step" data-step="3">
+                    <div class="p-dot">3</div>
+                    <div class="p-label">Data & Alamat</div>
+                </div>
+                <div class="p-step" data-step="4">
+                    <div class="p-dot">4</div>
+                    <div class="p-label">Konfirmasi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-page-wrap">
+        <div class="container">
+            <div class="fp-layout">
+
+                <form id="order-form" novalidate>
+                    <div class="fp-card">
+
+                        <!-- STEP 1 — LAYANAN & PERANGKAT -->
+                        <div class="step-panel active" data-panel="1">
+                            <div class="sp-head">
+                                <h2>Pilih Layanan &amp; Perangkat</h2>
+                                <p>Pilih jenis perangkat yang bermasalah, lalu lengkapi detail mereknya.</p>
+                            </div>
+
+                            <div class="svc-grid" id="svc-grid">
+                                <label class="svc-opt">
+                                    <input type="radio" name="layanan" value="Service AC" data-issues="ac">
+                                    <div class="svc-card"><i class="fas fa-wind"></i><span>Service AC</span></div>
+                                </label>
+                                <label class="svc-opt">
+                                    <input type="radio" name="layanan" value="Service Kulkas" data-issues="kulkas">
+                                    <div class="svc-card"><i class="fas fa-temperature-low"></i><span>Service
+                                            Kulkas</span></div>
+                                </label>
+                                <label class="svc-opt">
+                                    <input type="radio" name="layanan" value="Service Mesin Cuci"
+                                        data-issues="mesincuci">
+                                    <div class="svc-card"><i class="fas fa-rotate"></i><span>Mesin Cuci</span></div>
+                                </label>
+                                <label class="svc-opt">
+                                    <input type="radio" name="layanan" value="Service Water Heater"
+                                        data-issues="waterheater">
+                                    <div class="svc-card"><i class="fas fa-fire-flame-curved"></i><span>Water
+                                            Heater</span></div>
+                                </label>
+                                <label class="svc-opt">
+                                    <input type="radio" name="layanan" value="Service TV" data-issues="tv">
+                                    <div class="svc-card"><i class="fas fa-tv"></i><span>Service TV</span></div>
+                                </label>
+                                <label class="svc-opt">
+                                    <input type="radio" name="layanan" value="Elektronik Lainnya" data-issues="lainnya">
+                                    <div class="svc-card"><i class="fas fa-plug-circle-bolt"></i><span>Lainnya</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="err-msg" id="err-layanan" style="margin-bottom:20px;">Silakan pilih salah satu
+                                layanan.</div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="field-label" for="of-brand">Merek Perangkat <span
+                                            class="opt">(opsional)</span></label>
+                                    <input type="text" id="of-brand" name="merek"
+                                        placeholder="Contoh: Samsung, Daikin, LG">
+                                </div>
+                                <div class="form-group">
+                                    <label class="field-label" for="of-type">Tipe / Kapasitas <span
+                                            class="opt">(opsional)</span></label>
+                                    <input type="text" id="of-type" name="tipe"
+                                        placeholder="Contoh: 1 PK, 2 Pintu, 8 Kg">
+                                </div>
+                                <div class="form-group full">
+                                    <label class="field-label" for="of-usia">Usia Pemakaian Perangkat <span
+                                            class="opt">(opsional)</span></label>
+                                    <select id="of-usia" name="usia_pakai">
+                                        <option value="" selected>-- Pilih usia perangkat --</option>
+                                        <option value="Kurang dari 1 tahun">Kurang dari 1 tahun</option>
+                                        <option value="1-3 tahun">1&ndash;3 tahun</option>
+                                        <option value="3-5 tahun">3&ndash;5 tahun</option>
+                                        <option value="Lebih dari 5 tahun">Lebih dari 5 tahun</option>
+                                        <option value="Tidak yakin">Tidak yakin</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="step-nav">
+                                <button type="button" class="btn btn-ghost btn-invisible">Kembali</button>
+                                <button type="button" class="btn btn-primary" data-next>Lanjut <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2 — DETAIL KERUSAKAN -->
+                        <div class="step-panel" data-panel="2">
+                            <div class="sp-head">
+                                <h2>Detail Kerusakan</h2>
+                                <p>Semakin lengkap detailnya, semakin akurat estimasi yang bisa kami berikan.</p>
+                            </div>
+
+                            <div class="form-group full issue-wrap">
+                                <label class="field-label">Gejala yang Dialami <span class="opt">(pilih yang sesuai,
+                                        opsional)</span></label>
+                                <div class="issue-chips" id="issue-chips">
+                                    <div class="issue-placeholder" id="issue-placeholder">Pilih layanan di Langkah 1
+                                        dulu untuk melihat pilihan gejala.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group full">
+                                <label class="field-label" for="of-problem">Deskripsi Kerusakan <span
+                                        class="req">*</span></label>
+                                <textarea id="of-problem" name="kerusakan" rows="4"
+                                    placeholder="Ceritakan lebih detail gejala kerusakannya, kapan mulai muncul, dan hal lain yang perlu kami tahu."></textarea>
+                                <div class="err-msg">Mohon jelaskan kerusakan perangkat Anda.</div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="field-label">Pernah Diperbaiki Sebelumnya? <span
+                                            class="opt">(opsional)</span></label>
+                                    <div class="pill-group">
+                                        <label class="pill-opt"><input type="radio" name="pernah_service"
+                                                value="Sudah pernah"><span class="pill-lbl"><i class="fas fa-check"></i>
+                                                Sudah pernah</span></label>
+                                        <label class="pill-opt"><input type="radio" name="pernah_service"
+                                                value="Belum pernah"><span class="pill-lbl">Belum pernah</span></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="field-label">Masih Bisa Menyala / Beroperasi? <span
+                                            class="opt">(opsional)</span></label>
+                                    <div class="pill-group">
+                                        <label class="pill-opt"><input type="radio" name="status_nyala"
+                                                value="Masih menyala"><span class="pill-lbl">Masih
+                                                menyala</span></label>
+                                        <label class="pill-opt"><input type="radio" name="status_nyala"
+                                                value="Mati total"><span class="pill-lbl">Mati total</span></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group full">
+                                <label class="field-label" for="of-photo">Foto Kerusakan <span class="opt">(opsional,
+                                        bantu kirimkan susulan di chat WhatsApp)</span></label>
+                                <label class="upload-box" for="of-photo">
+                                    <i class="fas fa-camera"></i>
+                                    <p>Klik untuk pilih foto</p>
+                                    <span>JPG/PNG, maks. 5 foto — akan diingatkan untuk dilampirkan di chat WA</span>
+                                </label>
+                                <input type="file" id="of-photo" accept="image/*" multiple>
+                                <div class="file-list" id="file-list"></div>
+                            </div>
+
+                            <div class="step-nav">
+                                <button type="button" class="btn btn-ghost" data-prev><i class="fas fa-arrow-left"></i>
+                                    Kembali</button>
+                                <button type="button" class="btn btn-primary" data-next>Lanjut <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 — DATA DIRI, ALAMAT & JADWAL -->
+                        <div class="step-panel" data-panel="3">
+                            <div class="sp-head">
+                                <h2>Data Diri, Alamat &amp; Jadwal</h2>
+                                <p>Data ini kami pakai untuk mengarahkan teknisi ke lokasi Anda.</p>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="field-label" for="of-name">Nama Lengkap <span
+                                            class="req">*</span></label>
+                                    <input type="text" id="of-name" name="nama" placeholder="Contoh: Budi Santoso"
+                                        autocomplete="name">
+                                    <div class="err-msg">Mohon isi nama lengkap Anda.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="field-label" for="of-phone">Nomor WhatsApp <span
+                                            class="req">*</span></label>
+                                    <input type="tel" id="of-phone" name="telepon" placeholder="Contoh: 08123456789"
+                                        autocomplete="tel">
+                                    <div class="err-msg">Mohon isi nomor WhatsApp aktif Anda.</div>
+                                </div>
+                                <div class="form-group full">
+                                    <label class="field-label" for="of-address">Alamat Lengkap <span
+                                            class="req">*</span></label>
+                                    <input type="text" id="of-address" name="alamat"
+                                        placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan"
+                                        autocomplete="street-address">
+                                    <div class="err-msg">Mohon isi alamat lengkap lokasi perangkat.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="field-label" for="of-area">Kota / Wilayah <span
+                                            class="req">*</span></label>
+                                    <select id="of-area" name="wilayah">
+                                        <option value="" disabled selected>-- Pilih wilayah --</option>
+                                        <option value="Kota Depok">Kota Depok</option>
+                                        <option value="Jakarta Timur">Jakarta Timur</option>
+                                        <option value="Jakarta Selatan">Jakarta Selatan</option>
+                                        <option value="Jakarta Pusat">Jakarta Pusat</option>
+                                        <option value="Jakarta Utara">Jakarta Utara</option>
+                                        <option value="Jakarta Barat">Jakarta Barat</option>
+                                        <option value="Kota Bekasi">Kota Bekasi</option>
+                                        <option value="Kabupaten Bogor">Kabupaten Bogor</option>
+                                        <option value="Kota Bogor">Kota Bogor</option>
+                                        <option value="Kota Tangerang">Kota Tangerang</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
+                                    <div class="err-msg">Mohon pilih wilayah lokasi Anda.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="field-label" for="of-patokan">Patokan Lokasi <span
+                                            class="opt">(opsional)</span></label>
+                                    <input type="text" id="of-patokan" name="patokan"
+                                        placeholder="Contoh: dekat Indomaret, gang sebelah masjid">
+                                </div>
+                            </div>
+
+                            <div class="form-group full" style="margin-top:4px;">
+                                <label class="field-label">Tanggal &amp; Waktu Kunjungan <span class="opt">(opsional,
+                                        bisa disesuaikan saat konfirmasi)</span></label>
+                                <div class="form-grid" style="margin-top:0;">
+                                    <div class="form-group">
+                                        <input type="date" id="of-schedule" name="jadwal">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="time-grid">
+                                            <label class="time-opt">
+                                                <input type="radio" name="waktu" value="Pagi (08.00 - 11.00)">
+                                                <div class="time-card">
+                                                    <strong>Pagi</strong><span>08.00&ndash;11.00</span></div>
+                                            </label>
+                                            <label class="time-opt">
+                                                <input type="radio" name="waktu" value="Siang (11.00 - 14.00)">
+                                                <div class="time-card">
+                                                    <strong>Siang</strong><span>11.00&ndash;14.00</span></div>
+                                            </label>
+                                            <label class="time-opt">
+                                                <input type="radio" name="waktu" value="Sore (14.00 - 18.00)">
+                                                <div class="time-card">
+                                                    <strong>Sore</strong><span>14.00&ndash;18.00</span></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group full">
+                                <label class="field-label" for="of-notes">Catatan Tambahan <span
+                                        class="opt">(opsional)</span></label>
+                                <textarea id="of-notes" name="catatan" rows="3"
+                                    placeholder="Contoh: akses masuk lewat pintu belakang, ada anjing di rumah, dll."></textarea>
+                            </div>
+
+                            <div class="step-nav">
+                                <button type="button" class="btn btn-ghost" data-prev><i class="fas fa-arrow-left"></i>
+                                    Kembali</button>
+                                <button type="button" class="btn btn-primary" data-next>Lanjut ke Konfirmasi <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 4 — REVIEW & SUBMIT -->
+                        <div class="step-panel" data-panel="4">
+                            <div class="sp-head">
+                                <h2>Konfirmasi Pesanan</h2>
+                                <p>Periksa kembali detail di bawah ini sebelum mengirim ke WhatsApp kami.</p>
+                            </div>
+
+                            <div class="review-grid" id="review-grid">
+                                <!-- filled by JS -->
+                            </div>
+
+                            <div class="review-note">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Klik "Kirim ke WhatsApp", pesan Anda akan otomatis tersusun rapi dan langsung
+                                    terkirim ke nomor kami &mdash; tidak perlu ketik ulang.</span>
+                            </div>
+
+                            <div class="step-nav">
+                                <button type="button" class="btn btn-ghost" data-prev><i class="fas fa-arrow-left"></i>
+                                    Kembali</button>
+                                <button type="submit" class="btn btn-wa-submit"><i class="fab fa-whatsapp"></i> Kirim ke
+                                    WhatsApp</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+                <aside class="fp-sidebar">
+                    <div class="side-card">
+                        <h4><i class="fas fa-circle-check"></i> Kenapa Pesan di Sini?</h4>
+                        <div class="side-list">
+                            <div class="side-item"><i class="fas fa-bolt"></i><span><strong>Respons
+                                        Cepat</strong>Dibalas dalam hitungan menit setelah form terkirim.</span></div>
+                            <div class="side-item"><i class="fas fa-truck-fast"></i><span><strong>Teknisi
+                                        Datang</strong>Langsung ke lokasi Anda, tidak perlu keluar rumah.</span></div>
+                            <div class="side-item"><i class="fas fa-receipt"></i><span><strong>Estimasi
+                                        Gratis</strong>Biaya dijelaskan dulu sebelum perbaikan dimulai.</span></div>
+                            <div class="side-item"><i class="fas fa-shield-halved"></i><span><strong>Bergaransi
+                                        Resmi</strong>Setiap hasil servis kami tanggung dengan garansi.</span></div>
+                        </div>
+                    </div>
+                    <div class="side-card contact">
+                        <h4><i class="fas fa-headset" style="color:#fff;"></i> Butuh Bantuan Cepat?</h4>
+                        <div class="side-list">
+                            <div class="side-item"><i class="fas fa-phone"></i><span>0853-5583-6128</span></div>
+                            <div class="side-item"><i class="fas fa-clock"></i><span>Senin&ndash;Sabtu,
+                                    08.00&ndash;18.00 WIB</span></div>
+                        </div>
+                        <a href="https://wa.me/6285355836128?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20konsultasi%20sebelum%20mengisi%20form"
+                            target="_blank" class="btn btn-primary"
+                            style="background:#fff;color:var(--primary);box-shadow:none;">
+                            <i class="fab fa-whatsapp"></i> Chat Dulu
+                        </a>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-box">
+            <div class="success-icon"><i class="fab fa-whatsapp"></i></div>
+            <h3>Membuka WhatsApp&hellip;</h3>
+            <p>Pesan Anda sudah tersusun rapi. Jika WhatsApp tidak terbuka otomatis, klik tombol di bawah ini.</p>
+            <a href="#" id="success-wa-link" target="_blank" class="btn btn-wa-submit" style="width:100%;">
+                <i class="fab fa-whatsapp"></i> Buka WhatsApp Manual
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // ═══ ISSUE OPTIONS PER SERVICE ═══
+        const ISSUES = {
+            ac: ['Tidak dingin', 'Bocor / netes air', 'Berisik', 'Bau tidak sedap', 'Remote tidak berfungsi', 'Cuci AC rutin'],
+            kulkas: ['Tidak dingin', 'Terlalu beku / bunga es', 'Berbunyi keras', 'Bocor air', 'Lampu tidak menyala', 'Pintu tidak rapat'],
+            mesincuci: ['Tidak berputar', 'Bocor', 'Berisik / bergetar keras', 'Tidak bisa spin/kering', 'Error di layar', 'Air tidak keluar/masuk'],
+            waterheater: ['Air tidak panas', 'Mati total', 'Bocor', 'Alarm/indikator error', 'Suara aneh saat nyala'],
+            tv: ['Layar gelap total', 'Tidak ada sinyal', 'Gambar bergaris/pecah', 'Suara tidak ada', 'Tidak bisa menyala', 'Remote tidak berfungsi'],
+            lainnya: ['Tidak menyala', 'Mati mendadak', 'Berisik', 'Bau terbakar', 'Konslet/percikan listrik']
+        };
+
+        const issueChips = document.getElementById('issue-chips');
+        const issuePlaceholder = document.getElementById('issue-placeholder');
+
+        document.querySelectorAll('input[name="layanan"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('svc-grid').closest('.form-group')?.classList.remove('err');
+                const key = radio.dataset.issues;
+                const list = ISSUES[key] || [];
+                issueChips.innerHTML = '';
+                if (!list.length) {
+                    issueChips.appendChild(issuePlaceholder);
+                    return;
+                }
+                list.forEach((issue, i) => {
+                    const wrap = document.createElement('label');
+                    wrap.className = 'issue-chip';
+                    wrap.innerHTML = `
+                        <input type="checkbox" name="gejala" value="${issue}">
+                        <span class="issue-chip-lbl"><i class="fas fa-check"></i>${issue}</span>
+                    `;
+                    issueChips.appendChild(wrap);
+                });
+            });
+        });
+
+        // ═══ FILE UPLOAD (client-side list only, WA can't attach files programmatically) ═══
+        const photoInput = document.getElementById('of-photo');
+        const fileList = document.getElementById('file-list');
+        let selectedFiles = [];
+
+        photoInput.addEventListener('change', () => {
+            const newFiles = Array.from(photoInput.files).slice(0, 5 - selectedFiles.length);
+            selectedFiles = selectedFiles.concat(newFiles).slice(0, 5);
+            renderFileList();
+        });
+
+        function renderFileList() {
+            fileList.innerHTML = '';
+            selectedFiles.forEach((f, idx) => {
+                const chip = document.createElement('div');
+                chip.className = 'file-chip';
+                chip.innerHTML = `<span><i class="fas fa-image" style="margin-right:6px;color:var(--primary);"></i>${f.name}</span><i class="fas fa-xmark" data-idx="${idx}"></i>`;
+                fileList.appendChild(chip);
+            });
+            fileList.querySelectorAll('.fa-xmark').forEach(x => {
+                x.addEventListener('click', () => {
+                    selectedFiles.splice(parseInt(x.dataset.idx), 1);
+                    renderFileList();
+                });
+            });
+        }
+
+        // ═══ MULTI-STEP NAV ═══
+        const panels = Array.from(document.querySelectorAll('.step-panel'));
+        const pSteps = Array.from(document.querySelectorAll('.p-step'));
+        const progressFill = document.getElementById('progress-fill');
+        let current = 1;
+        const TOTAL = panels.length;
+
+        function goTo(step) {
+            panels.forEach(p => p.classList.toggle('active', parseInt(p.dataset.panel) === step));
+            pSteps.forEach(s => {
+                const n = parseInt(s.dataset.step);
+                s.classList.toggle('active', n === step);
+                s.classList.toggle('done', n < step);
+            });
+            const pct = ((step - 1) / (TOTAL - 1)) * 100;
+            progressFill.style.width = pct + '%';
+            current = step;
+            if (step === 4) buildReview();
+            document.querySelector('.fp-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function validateStep(step) {
+            let valid = true;
+            if (step === 1) {
+                const chosen = document.querySelector('input[name="layanan"]:checked');
+                const err = document.getElementById('err-layanan');
+                if (!chosen) { err.style.display = 'block'; valid = false; }
+                else { err.style.display = 'none'; }
+            }
+            if (step === 2) {
+                const problem = document.getElementById('of-problem');
+                const grp = problem.closest('.form-group');
+                if (!problem.value.trim()) { grp.classList.add('err'); valid = false; }
+                else { grp.classList.remove('err'); }
+            }
+            if (step === 3) {
+                const required = [
+                    document.getElementById('of-name'),
+                    document.getElementById('of-phone'),
+                    document.getElementById('of-address'),
+                    document.getElementById('of-area')
+                ];
+                required.forEach(el => {
+                    const grp = el.closest('.form-group');
+                    if (!el.value.trim()) { grp.classList.add('err'); valid = false; }
+                    else { grp.classList.remove('err'); }
+                });
+            }
+            return valid;
+        }
+
+        document.querySelectorAll('[data-next]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (validateStep(current) && current < TOTAL) goTo(current + 1);
+            });
+        });
+        document.querySelectorAll('[data-prev]').forEach(btn => {
+            btn.addEventListener('click', () => { if (current > 1) goTo(current - 1); });
+        });
+
+        // clear error state as user types
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('input', () => el.closest('.form-group')?.classList.remove('err'));
+            el.addEventListener('change', () => el.closest('.form-group')?.classList.remove('err'));
+        });
+
+        // ═══ REVIEW STEP ═══
+        function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+        function checkedVal(name) { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; }
+        function checkedList(name) { return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(i => i.value); }
+
+        function buildReview() {
+            const grid = document.getElementById('review-grid');
+            const layanan = checkedVal('layanan') || '-';
+            const merek = val('of-brand');
+            const tipe = val('of-type');
+            const usia = val('of-usia');
+            const gejala = checkedList('gejala');
+            const kerusakan = val('of-problem');
+            const nama = val('of-name');
+            const telepon = val('of-phone');
+            const alamat = val('of-address');
+            const wilayah = val('of-area');
+            const patokan = val('of-patokan');
+            const jadwal = val('of-schedule');
+            const waktu = checkedVal('waktu');
+            const catatan = val('of-notes');
+
+            let jadwalStr = '';
+            if (jadwal) {
+                const d = new Date(jadwal + 'T00:00:00');
+                jadwalStr = d.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }
+
+            grid.innerHTML = `
+                <div class="review-block">
+                    <h4>Layanan &amp; Perangkat</h4>
+                    <p>${layanan}</p>
+                    <p>${[merek, tipe].filter(Boolean).join(' &middot; ') || '<span class="review-empty">Merek/tipe tidak diisi</span>'}</p>
+                    ${usia ? `<p>Usia pakai: ${usia}</p>` : ''}
+                </div>
+                <div class="review-block">
+                    <h4>Data Diri</h4>
+                    <p>${nama || '<span class="review-empty">Belum diisi</span>'}</p>
+                    <p>${telepon || '<span class="review-empty">Belum diisi</span>'}</p>
+                </div>
+                <div class="review-block full">
+                    <h4>Alamat</h4>
+                    <p>${alamat || '<span class="review-empty">Belum diisi</span>'}${wilayah ? ', ' + wilayah : ''}</p>
+                    ${patokan ? `<p>Patokan: ${patokan}</p>` : ''}
+                </div>
+                <div class="review-block full">
+                    <h4>Kerusakan</h4>
+                    ${gejala.length ? `<p>Gejala: ${gejala.join(', ')}</p>` : ''}
+                    <p>${kerusakan || '<span class="review-empty">Belum diisi</span>'}</p>
+                </div>
+                <div class="review-block">
+                    <h4>Jadwal Kunjungan</h4>
+                    <p>${jadwalStr || '<span class="review-empty">Fleksibel / belum ditentukan</span>'}</p>
+                    <p>${waktu || ''}</p>
+                </div>
+                <div class="review-block">
+                    <h4>Catatan Lain</h4>
+                    <p>${catatan || '<span class="review-empty">Tidak ada</span>'}</p>
+                    ${selectedFiles.length ? `<p>${selectedFiles.length} foto disiapkan (kirim manual di chat)</p>` : ''}
+                </div>
+            `;
+        }
+
+        // ═══ SUBMIT → WHATSAPP ═══
+        document.getElementById('order-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!validateStep(1) || !validateStep(2) || !validateStep(3)) {
+                // jump back to first invalid step
+                if (!validateStep(1)) return goTo(1);
+                if (!validateStep(2)) return goTo(2);
+                if (!validateStep(3)) return goTo(3);
+            }
+
+            const layanan = checkedVal('layanan');
+            const merek = val('of-brand');
+            const tipe = val('of-type');
+            const usia = val('of-usia');
+            const gejala = checkedList('gejala');
+            const kerusakan = val('of-problem');
+            const pernahService = checkedVal('pernah_service');
+            const statusNyala = checkedVal('status_nyala');
+            const nama = val('of-name');
+            const telepon = val('of-phone');
+            const alamat = val('of-address');
+            const wilayah = val('of-area');
+            const patokan = val('of-patokan');
+            const jadwal = val('of-schedule');
+            const waktu = checkedVal('waktu');
+            const catatan = val('of-notes');
+
+            let jadwalStr = '';
+            if (jadwal) {
+                const d = new Date(jadwal + 'T00:00:00');
+                jadwalStr = d.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }
+
+            let msg = `Halo Gemilang Teknik Service, saya ingin memesan jasa service:%0A%0A`;
+            msg += `*DETAIL PEMESANAN*%0A---------------------%0A`;
+            msg += `Layanan : ${layanan}%0A`;
+            if (merek || tipe) msg += `Merek/Tipe : ${[merek, tipe].filter(Boolean).join(' - ')}%0A`;
+            if (usia) msg += `Usia Pakai : ${usia}%0A`;
+            msg += `%0ANama : ${nama}%0A`;
+            msg += `No. HP : ${telepon}%0A`;
+            msg += `Alamat : ${alamat}${wilayah ? ', ' + wilayah : ''}%0A`;
+            if (patokan) msg += `Patokan : ${patokan}%0A`;
+            msg += `%0A*Deskripsi Kerusakan :*%0A`;
+            if (gejala.length) msg += `Gejala : ${gejala.join(', ')}%0A`;
+            msg += `${kerusakan}%0A`;
+            if (pernahService) msg += `Pernah diperbaiki : ${pernahService}%0A`;
+            if (statusNyala) msg += `Status perangkat : ${statusNyala}%0A`;
+            if (jadwalStr || waktu) {
+                msg += `%0A*Jadwal yang Diinginkan :*%0A`;
+                if (jadwalStr) msg += `Tanggal : ${jadwalStr}%0A`;
+                if (waktu) msg += `Waktu : ${waktu}%0A`;
+            }
+            if (catatan) msg += `%0ACatatan : ${catatan}%0A`;
+            if (selectedFiles.length) msg += `%0A(Saya juga punya ${selectedFiles.length} foto kerusakan, akan saya kirimkan menyusul di chat ini)%0A`;
+            msg += `%0ATerima kasih.`;
+
+            const waUrl = `https://wa.me/6285355836128?text=${msg}`;
+            document.getElementById('success-wa-link').href = waUrl;
+            document.getElementById('success-overlay').classList.add('open');
+            window.open(waUrl, '_blank');
+        });
+
+        // set min date
+        const scheduleInput = document.getElementById('of-schedule');
+        if (scheduleInput) scheduleInput.min = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+
+</html>
