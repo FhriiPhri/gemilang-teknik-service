@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Panel Teknisi – Gemilang Teknik</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* RESET */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #c1121f;
+      --primary-d: #950e18;
+      --primary-light: #e5383b;
+      --green: #16a34a;
+      --green-d: #15803d;
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --bg-card: #1e1e1e;
+      --border: rgba(255, 255, 255, .09);
+      --text: #f1ede9;
+      --text-2: #c4b5b0;
+      --text-muted: #7a6a63;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --transition: .3s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* HEADER */
+    .app-header {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-title {
+      flex: 1;
+    }
+
+    .header-title h1 {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .header-title p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(193, 18, 31, .2);
+      color: var(--primary-light);
+      border: 1px solid rgba(193, 18, 31, .35);
+      padding: 3px 8px;
+      border-radius: 20px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ORDER CARD */
+    .order-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .order-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(193, 18, 31, .15);
+      border: 1px solid rgba(193, 18, 31, .25);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .order-info h2 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    .order-info p {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-light);
+      margin-top: 3px;
+      letter-spacing: .5px;
+    }
+
+    /* GPS INDICATOR */
+    .gps-indicator {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .gps-indicator.active {
+      border-color: rgba(22, 163, 74, .4);
+      background: rgba(22, 163, 74, .07);
+    }
+
+    .gps-indicator.error {
+      border-color: rgba(193, 18, 31, .4);
+      background: rgba(193, 18, 31, .07);
+    }
+
+    .pulse-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .gps-indicator.active .pulse-dot {
+      background: var(--green);
+      animation: pulseGreen 1.5s infinite;
+    }
+
+    .gps-indicator.error .pulse-dot {
+      background: var(--primary-light);
+    }
+
+    @keyframes pulseGreen {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, .6);
+      }
+
+      50% {
+        box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
+      }
+    }
+
+    .indicator-text {
+      flex: 1;
+    }
+
+    .indicator-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .gps-indicator.active .indicator-text strong {
+      color: #4ade80;
+    }
+
+    .gps-indicator.error .indicator-text strong {
+      color: var(--primary-light);
+    }
+
+    .indicator-text span {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: block;
+    }
+
+    .indicator-icon {
+      font-size: 20px;
+      color: var(--text-muted);
+    }
+
+    .gps-indicator.active .indicator-icon {
+      color: #4ade80;
+    }
+
+    .gps-indicator.error .indicator-icon {
+      color: var(--primary-light);
+    }
+
+    /* TOGGLE BUTTON */
+    .btn-toggle {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: var(--radius-lg);
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-toggle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .btn-toggle.start {
+      background: linear-gradient(135deg, var(--green), var(--green-d));
+      color: #fff;
+      box-shadow: 0 6px 28px rgba(22, 163, 74, .4);
+    }
+
+    .btn-toggle.start:active {
+      transform: scale(.97);
+    }
+
+    .btn-toggle.stop {
+      background: linear-gradient(135deg, var(--primary), var(--primary-d));
+      color: #fff;
+      box-shadow: 0 6px 28px rgba(193, 18, 31, .4);
+    }
+
+    .btn-toggle.stop:active {
+      transform: scale(.97);
+    }
+
+    .btn-toggle:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-icon {
+      font-size: 20px;
+    }
+
+    /* STATS */
+    .status-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+
+    .status-card h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 16px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .stat-item label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .stat-item span {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .stat-item.full {
+      grid-column: 1 / -1;
+    }
+
+    /* LINK CARD */
+    .link-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+    }
+
+    .link-card label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .link-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .link-row input {
+      flex: 1;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--text-2);
+      outline: none;
+      min-width: 0;
+    }
+
+    .btn-copy {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+      transition: background var(--transition);
+      flex-shrink: 0;
+    }
+
+    .btn-copy:active {
+      background: rgba(255, 255, 255, .15);
+    }
+
+    .btn-copy.copied {
+      color: #4ade80;
+    }
+
+    /* LOG */
+    .log-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .log-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .log-header span {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    .log-count {
+      background: rgba(193, 18, 31, .2);
+      color: var(--primary-light);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+
+    .log-body {
+      max-height: 180px;
+      overflow-y: auto;
+      padding: 10px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .log-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 18px;
+      font-size: 12px;
+      animation: fadeInLog .25s ease;
+    }
+
+    @keyframes fadeInLog {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .log-time {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      margin-top: 1px;
+    }
+
+    .log-msg {
+      color: var(--text-2);
+      line-height: 1.4;
+    }
+
+    .log-item.success .log-msg {
+      color: #4ade80;
+    }
+
+    .log-item.error .log-msg {
+      color: var(--primary-light);
+    }
+
+    .log-item.warn .log-msg {
+      color: #fbbf24;
+    }
+
+    .log-empty {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      padding: 20px;
+    }
+
+    /* FOOTER */
+    .app-footer {
+      padding: 16px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .app-footer strong {
+      color: var(--primary-light);
+    }
+
+    /* NO ORDER SCREEN */
+    .no-order-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+      gap: 16px;
+    }
+
+    .no-order-screen .icon {
+      font-size: 56px;
+      color: var(--text-muted);
+    }
+
+    .no-order-screen h2 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .no-order-screen p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    .no-order-screen code {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--primary-light);
+      display: block;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="logo-mark">🔧</div>
+    <div class="header-title">
+      <h1>Gemilang Teknik Service</h1>
+      <p>Panel Teknisi – Live GPS Tracking</p>
+    </div>
+    <div class="badge">Teknisi</div>
+  </header>
+
+  <!-- SCREEN: TIDAK ADA ORDER ID -->
+  <div class="no-order-screen" id="screen-no-order" style="display:none;">
+    <div class="icon">🔗</div>
+    <h2>Kode Order Tidak Ditemukan</h2>
+    <p>Panel ini harus dibuka dengan menyertakan kode order di URL. Hubungi admin untuk mendapatkan link yang benar.</p>
+    <code>teknisi.html?order_id=ORD-12345</code>
+  </div>
+
+  <!-- SCREEN: MAIN PANEL -->
+  <main class="main" id="screen-main">
+
+    <!-- Order Info -->
+    <div class="order-card">
+      <div class="order-icon">📋</div>
+      <div class="order-info">
+        <h2>Kode Order Aktif</h2>
+        <p id="order-id-display">–</p>
+      </div>
+    </div>
+
+    <!-- GPS Indicator -->
+    <div class="gps-indicator" id="gps-indicator">
+      <div class="pulse-dot"></div>
+      <div class="indicator-text">
+        <strong id="indicator-title">GPS Tidak Aktif</strong>
+        <span id="indicator-sub">Tekan tombol di bawah untuk mulai mengirim lokasi</span>
+      </div>
+      <div class="indicator-icon"><i class="fas fa-satellite-dish" id="indicator-icon-fa"></i></div>
+    </div>
+
+    <!-- Toggle Button -->
+    <button class="btn-toggle start" id="btn-toggle" onclick="handleToggle()">
+      <span class="btn-icon">📡</span>
+      <span id="btn-text">Mulai Kirim Lokasi</span>
+    </button>
+
+    <!-- Stats -->
+    <div class="status-card">
+      <h3>📊 Data GPS Terkini</h3>
+      <div class="status-grid">
+        <div class="stat-item">
+          <label>🌐 Latitude</label>
+          <span id="stat-lat">–</span>
+        </div>
+        <div class="stat-item">
+          <label>🌐 Longitude</label>
+          <span id="stat-lng">–</span>
+        </div>
+        <div class="stat-item">
+          <label>🎯 Akurasi</label>
+          <span id="stat-acc">–</span>
+        </div>
+        <div class="stat-item">
+          <label>📶 Kiriman</label>
+          <span id="stat-count">0x</span>
+        </div>
+        <div class="stat-item full">
+          <label>🕐 Update Terakhir</label>
+          <span id="stat-update">Belum ada data</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copy Link Customer -->
+    <div class="link-card">
+      <label>🔗 Link Lacak untuk Customer</label>
+      <div class="link-row">
+        <input type="text" id="tracking-link" readonly placeholder="Link tracking akan muncul di sini...">
+        <button class="btn-copy" id="btn-copy" onclick="copyTrackingLink()">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Log -->
+    <div class="log-card">
+      <div class="log-header">
+        <span>📝 Log Aktivitas</span>
+        <span class="log-count" id="log-count">0</span>
+      </div>
+      <div class="log-body" id="log-body">
+        <div class="log-empty" id="log-empty">Belum ada aktivitas...</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <strong>Gemilang Teknik Service</strong> &mdash; Teknisi Panel v1.0
+  </footer>
+
+
+  <!-- ================================================================
+       FIREBASE SDK v9 (Compat Mode)
+  ================================================================ -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    /* ================================================================
+       STEP 1 — GANTI firebaseConfig dengan milik Anda!
+       Cara mendapatkan konfigurasi:
+         1. Buka https://console.firebase.google.com
+         2. Buat / pilih project
+         3. Klik ⚙️ Project Settings → Your apps → Tambah Web App (</>)
+         4. Salin object firebaseConfig yang diberikan
+         5. Di Firebase Console → Realtime Database → Rules, gunakan:
+            {
+              "rules": {
+                "tracking": {
+                  "$order_id": {
+                    ".read": true,
+                    ".write": true
+                  }
+                }
+              }
+            }
+    ================================================================ */
+    const firebaseConfig = {
+      apiKey: "AIzaSyBfyyaAhntAGq5qAwvtGnzd7PWI_ehrxjc",
+      authDomain: "lacak-9add0.firebaseapp.com",
+      databaseURL: "https://lacak-9add0-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "lacak-9add0",
+      storageBucket: "lacak-9add0.firebasestorage.app",
+      messagingSenderId: "637614768388",
+      appId: "1:637614768388:web:ac1afa748a29a3e1a2d051",
+    };
+
+    /* ── INIT FIREBASE ── */
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    /* ── AMBIL ORDER ID DARI URL ── */
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('order_id');
+
+    /* ── STATE ── */
+    let watchId = null;
+    let isTracking = false;
+    let sendCount = 0;
+    let logCount = 0;
+
+    /* ── ELEMENTS ── */
+    const elOrderDisplay = document.getElementById('order-id-display');
+    const elBtnToggle = document.getElementById('btn-toggle');
+    const elBtnText = document.getElementById('btn-text');
+    const elIndicator = document.getElementById('gps-indicator');
+    const elIndicTitle = document.getElementById('indicator-title');
+    const elIndicSub = document.getElementById('indicator-sub');
+    const elIndicIcon = document.getElementById('indicator-icon-fa');
+    const elStatLat = document.getElementById('stat-lat');
+    const elStatLng = document.getElementById('stat-lng');
+    const elStatAcc = document.getElementById('stat-acc');
+    const elStatCount = document.getElementById('stat-count');
+    const elStatUpdate = document.getElementById('stat-update');
+    const elLogBody = document.getElementById('log-body');
+    const elLogEmpty = document.getElementById('log-empty');
+    const elLogCount = document.getElementById('log-count');
+    const elTrackLink = document.getElementById('tracking-link');
+
+    /* ── ON LOAD ── */
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!orderId) {
+        document.getElementById('screen-main').style.display = 'none';
+        document.getElementById('screen-no-order').style.display = 'flex';
+        return;
+      }
+      elOrderDisplay.textContent = orderId;
+
+      // Buat link tracking untuk customer
+      const base = window.location.href
+        .split('?')[0]
+        .replace('teknisi.html', 'tracking.html');
+      elTrackLink.value = `${base}?order_id=${orderId}`;
+
+      addLog('info', `Panel dimuat. Order: ${orderId}`);
+      setTechnicianStatus('online');
+    });
+
+    /* ================================================================
+       TOGGLE TRACKING
+    ================================================================ */
+    function handleToggle() {
+      isTracking ? stopTracking() : startTracking();
+    }
+
+    function startTracking() {
+      if (!('geolocation' in navigator)) {
+        addLog('error', 'Browser tidak mendukung GPS!');
+        setIndicatorError('GPS Tidak Didukung', 'Browser Anda tidak mendukung Geolocation API.');
+        return;
+      }
+
+      elBtnToggle.disabled = true;
+      setIndicatorWaiting('Menunggu sinyal GPS...', 'Mohon izinkan akses lokasi di browser');
+      addLog('warn', 'Meminta akses GPS...');
+
+      watchId = navigator.geolocation.watchPosition(
+        onGpsSuccess,
+        onGpsError,
+        {
+          enableHighAccuracy: true,  // gunakan GPS chip (lebih akurat dari WiFi/IP)
+          timeout: 15000,
+          maximumAge: 0      // selalu ambil posisi fresh, tidak dari cache
+        }
+      );
+    }
+
+    function stopTracking() {
+      if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+      }
+      isTracking = false;
+      setIndicatorOff();
+      elBtnToggle.className = 'btn-toggle start';
+      elBtnToggle.querySelector('.btn-icon').textContent = '📡';
+      elBtnText.textContent = 'Mulai Kirim Lokasi';
+      setTechnicianStatus('offline');
+      addLog('warn', 'Pengiriman lokasi dihentikan.');
+    }
+
+    /* ================================================================
+       GPS CALLBACKS
+    ================================================================ */
+    function onGpsSuccess(position) {
+      const { latitude, longitude, accuracy } = position.coords;
+      const now = new Date();
+
+      // Pertama kali berhasil → ubah state & UI tombol
+      if (!isTracking) {
+        isTracking = true;
+        elBtnToggle.disabled = false;
+        elBtnToggle.className = 'btn-toggle stop';
+        elBtnToggle.querySelector('.btn-icon').textContent = '🛑';
+        elBtnText.textContent = 'Hentikan Tracking';
+        addLog('success', 'GPS aktif! Mulai mengirim lokasi...');
+      }
+
+      setIndicatorActive('GPS Aktif – Lokasi Sedang Dikirim', `Akurasi: ±${Math.round(accuracy)} meter`);
+
+      // Update stats UI
+      elStatLat.textContent = latitude.toFixed(6);
+      elStatLng.textContent = longitude.toFixed(6);
+      elStatAcc.textContent = `±${Math.round(accuracy)} m`;
+      elStatCount.textContent = `${++sendCount}x`;
+      elStatUpdate.textContent = now.toLocaleTimeString('id-ID');
+
+      // Kirim ke Firebase
+      db.ref(`tracking/${orderId}`).set({
+        lat: latitude,
+        lng: longitude,
+        accuracy: accuracy,
+        updatedAt: now.toISOString(),
+        status: 'active',
+        count: sendCount
+      })
+        .then(() => {
+          addLog('success', `📍 Dikirim: ${latitude.toFixed(5)}, ${longitude.toFixed(5)} (±${Math.round(accuracy)}m)`);
+        })
+        .catch(err => {
+          addLog('error', `Firebase error: ${err.message}`);
+        });
+    }
+
+    function onGpsError(error) {
+      elBtnToggle.disabled = false;
+      let msg = '';
+      switch (error.code) {
+        case error.PERMISSION_DENIED: msg = 'Akses lokasi ditolak. Izinkan GPS di pengaturan browser.'; break;
+        case error.POSITION_UNAVAILABLE: msg = 'Sinyal GPS tidak tersedia. Coba di tempat terbuka.'; break;
+        case error.TIMEOUT: msg = 'Timeout! GPS terlalu lama merespons.'; break;
+        default: msg = `Error tidak diketahui (kode: ${error.code})`;
+      }
+      setIndicatorError('GPS Error', msg);
+      addLog('error', msg);
+      if (isTracking) stopTracking();
+    }
+
+    /* ================================================================
+       HELPERS
+    ================================================================ */
+    function setTechnicianStatus(status) {
+      if (!orderId) return;
+      db.ref(`tracking/${orderId}/status`).set(status).catch(() => { });
+    }
+
+    function setIndicatorActive(title, sub) { _setIndicator('active', title, sub, 'fas fa-satellite-dish'); }
+    function setIndicatorWaiting(title, sub) { _setIndicator('', title, sub, 'fas fa-circle-notch fa-spin'); }
+    function setIndicatorError(title, sub) { _setIndicator('error', title, sub, 'fas fa-exclamation-triangle'); }
+    function setIndicatorOff() {
+      _setIndicator('', 'GPS Tidak Aktif', 'Tekan tombol di bawah untuk mulai mengirim lokasi', 'fas fa-satellite-dish');
+    }
+    function _setIndicator(cls, title, sub, iconCls) {
+      elIndicator.className = `gps-indicator${cls ? ' ' + cls : ''}`;
+      elIndicTitle.textContent = title;
+      elIndicSub.textContent = sub;
+      elIndicIcon.className = iconCls;
+    }
+
+    function addLog(type, message) {
+      logCount++;
+      elLogCount.textContent = logCount;
+      elLogEmpty.style.display = 'none';
+      const time = new Date().toLocaleTimeString('id-ID');
+      const item = document.createElement('div');
+      item.className = `log-item ${type}`;
+      item.innerHTML = `<span class="log-time">${time}</span><span class="log-msg">${message}</span>`;
+      elLogBody.insertBefore(item, elLogBody.firstChild);
+      while (elLogBody.children.length > 51) elLogBody.removeChild(elLogBody.lastChild);
+    }
+
+    function copyTrackingLink() {
+      const btn = document.getElementById('btn-copy');
+      navigator.clipboard.writeText(elTrackLink.value)
+        .then(() => {
+          btn.innerHTML = '<i class="fas fa-check"></i>';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i>'; btn.classList.remove('copied'); }, 2000);
+          addLog('success', 'Link tracking disalin ke clipboard!');
+        })
+        .catch(() => { elTrackLink.select(); document.execCommand('copy'); });
+    }
+
+    // Tandai offline saat tab ditutup
+    window.addEventListener('beforeunload', () => { if (isTracking) setTechnicianStatus('offline'); });
+  </script>
+
+</body>
+
+</html>

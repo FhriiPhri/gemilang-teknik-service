@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Lacak Teknisi – Gemilang Teknik Service</title>
+  <meta name="description" content="Lacak posisi teknisi Gemilang Teknik Service secara real-time.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Leaflet.js CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #c1121f;
+      --primary-d: #950e18;
+      --primary-light: #e5383b;
+      --primary-glow: rgba(193, 18, 31, .22);
+      --green: #16a34a;
+      --orange: #ea580c;
+      --bg: #0f0f0f;
+      --bg-card: rgba(18, 18, 18, .92);
+      --border: rgba(255, 255, 255, .1);
+      --text: #f1ede9;
+      --text-2: #c4b5b0;
+      --text-muted: #7a6a63;
+      --radius: 12px;
+      --radius-lg: 18px;
+      --shadow: 0 8px 40px rgba(0, 0, 0, .6);
+      --transition: .3s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    /* ══ MAP CONTAINER ══ */
+    #map {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+
+    /* ══ LEAFLET TILE DARK FILTER ══ */
+    .leaflet-tile-pane {
+      filter: brightness(.85) saturate(.8);
+    }
+
+    /* ══ TOP BAR ══ */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .top-bar .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .top-bar .logo-mark {
+      width: 34px;
+      height: 34px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .top-bar .brand-text h1 {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .top-bar .brand-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .top-bar .order-chip {
+      background: rgba(193, 18, 31, .2);
+      border: 1px solid rgba(193, 18, 31, .35);
+      color: var(--primary-light);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: .4px;
+      white-space: nowrap;
+    }
+
+    /* ══ BOTTOM CARD ══ */
+    .bottom-card {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 20px 20px 28px;
+      transform: translateY(0);
+      transition: transform var(--transition);
+    }
+
+    .bottom-card.collapsed {
+      transform: translateY(calc(100% - 72px));
+    }
+
+    /* Collapse handle */
+    .card-handle {
+      width: 36px;
+      height: 4px;
+      background: rgba(255, 255, 255, .15);
+      border-radius: 2px;
+      margin: 0 auto 18px;
+      cursor: pointer;
+    }
+
+    /* Status row */
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      cursor: pointer;
+    }
+
+    .status-icon-wrap {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      background: rgba(193, 18, 31, .15);
+      border: 1px solid rgba(193, 18, 31, .3);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .status-icon-wrap.active {
+      background: rgba(22, 163, 74, .15);
+      border-color: rgba(22, 163, 74, .35);
+    }
+
+    .status-icon-wrap.offline {
+      background: rgba(120, 113, 108, .15);
+      border-color: rgba(120, 113, 108, .25);
+    }
+
+    .status-text {
+      flex: 1;
+    }
+
+    .status-text h2 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 3px;
+      transition: color var(--transition);
+    }
+
+    .status-text.active h2 {
+      color: #4ade80;
+    }
+
+    .status-text.offline h2 {
+      color: var(--text-muted);
+    }
+
+    .status-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Live badge */
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(22, 163, 74, .2);
+      border: 1px solid rgba(22, 163, 74, .35);
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #4ade80;
+      opacity: 0;
+      transform: scale(.8);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .live-badge.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: livePulse 1.2s infinite;
+    }
+
+    @keyframes livePulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(.7);
+      }
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      max-height: 200px;
+      overflow: hidden;
+      transition: max-height var(--transition), opacity var(--transition);
+    }
+
+    .bottom-card.collapsed .stats-grid {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .stat-box .s-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .stat-box .s-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Focus button */
+    .btn-focus {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      background: rgba(193, 18, 31, .15);
+      border: 1px solid rgba(193, 18, 31, .3);
+      border-radius: 10px;
+      color: var(--primary-light);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--transition);
+      max-height: 200px;
+      transition: max-height var(--transition), opacity var(--transition), margin var(--transition);
+    }
+
+    .bottom-card.collapsed .btn-focus {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+
+    .btn-focus:hover {
+      background: rgba(193, 18, 31, .25);
+    }
+
+    .btn-focus:active {
+      background: rgba(193, 18, 31, .3);
+    }
+
+    /* ══ LOADING OVERLAY ══ */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transition: opacity .5s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-spinner {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, .1);
+      border-top-color: var(--primary);
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-overlay p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ══ NO ORDER SCREEN ══ */
+    .no-order-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: var(--bg);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+      gap: 16px;
+    }
+
+    .no-order-overlay .icon {
+      font-size: 64px;
+    }
+
+    .no-order-overlay h2 {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .no-order-overlay p {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    .no-order-overlay code {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--primary-light);
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* ══ CUSTOM MARKER ══ */
+    .tech-marker {
+      background: var(--primary);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 20px rgba(193, 18, 31, .7), 0 0 0 6px rgba(193, 18, 31, .25);
+      animation: markerPulse 2s infinite;
+    }
+
+    @keyframes markerPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 20px rgba(193, 18, 31, .7), 0 0 0 4px rgba(193, 18, 31, .25);
+      }
+
+      50% {
+        box-shadow: 0 4px 20px rgba(193, 18, 31, .7), 0 0 0 12px rgba(193, 18, 31, 0);
+      }
+    }
+
+    /* ══ LEAFLET OVERRIDES ══ */
+    .leaflet-control-zoom {
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      overflow: hidden;
+    }
+
+    .leaflet-control-zoom a {
+      background: var(--bg-card) !important;
+      color: var(--text) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+
+    .leaflet-control-zoom a:hover {
+      background: rgba(255, 255, 255, .1) !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-spinner"></div>
+    <p>Menghubungkan ke server...</p>
+  </div>
+
+  <!-- NO ORDER OVERLAY -->
+  <div class="no-order-overlay" id="no-order-overlay">
+    <div class="icon">🔍</div>
+    <h2>Link Tidak Valid</h2>
+    <p>Halaman ini memerlukan kode order yang valid di URL. Minta link dari teknisi atau admin kami.</p>
+    <code>tracking.html?order_id=ORD-12345</code>
+  </div>
+
+  <!-- MAP -->
+  <div id="map"></div>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="logo-mark">🔧</div>
+      <div class="brand-text">
+        <h1>Gemilang Teknik Service</h1>
+        <p>Live Tracking Teknisi</p>
+      </div>
+    </div>
+    <div class="order-chip" id="order-chip">– – –</div>
+  </header>
+
+  <!-- BOTTOM INFO CARD -->
+  <div class="bottom-card" id="bottom-card">
+    <div class="card-handle" onclick="toggleCard()"></div>
+
+    <div class="status-row" onclick="toggleCard()">
+      <div class="status-icon-wrap" id="status-icon-wrap">🔍</div>
+      <div class="status-text" id="status-text-wrap">
+        <h2 id="status-title">Menunggu data teknisi...</h2>
+        <p id="status-sub">Teknisi belum mengaktifkan GPS</p>
+      </div>
+      <div class="live-badge" id="live-badge">
+        <div class="live-dot"></div>
+        LIVE
+      </div>
+    </div>
+
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-box">
+        <span class="s-label">📍 Latitude</span>
+        <span class="s-val" id="d-lat">–</span>
+      </div>
+      <div class="stat-box">
+        <span class="s-label">📍 Longitude</span>
+        <span class="s-val" id="d-lng">–</span>
+      </div>
+      <div class="stat-box">
+        <span class="s-label">🎯 Akurasi</span>
+        <span class="s-val" id="d-acc">–</span>
+      </div>
+      <div class="stat-box">
+        <span class="s-label">🕐 Update</span>
+        <span class="s-val" id="d-time">–</span>
+      </div>
+      <div class="stat-box">
+        <span class="s-label">📶 Kiriman</span>
+        <span class="s-val" id="d-count">–</span>
+      </div>
+      <div class="stat-box">
+        <span class="s-label">🔄 Status</span>
+        <span class="s-val" id="d-status">–</span>
+      </div>
+    </div>
+
+    <button class="btn-focus" onclick="focusOnTech()">
+      <i class="fas fa-crosshairs"></i>
+      Fokus ke Lokasi Teknisi
+    </button>
+  </div>
+
+
+  <!-- ================================================================
+       FIREBASE SDK v9 (Compat Mode)
+  ================================================================ -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <!-- Leaflet.js -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
+
+  <script>
+    /* ================================================================
+       STEP 1 — GANTI dengan konfigurasi Firebase Anda
+       (SAMA dengan yang di teknisi.html!)
+    ================================================================ */
+    const firebaseConfig = {
+      apiKey: "AIzaSyBfyyaAhntAGq5qAwvtGnzd7PWI_ehrxjc",
+      authDomain: "lacak-9add0.firebaseapp.com",
+      databaseURL: "https://lacak-9add0-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "lacak-9add0",
+      storageBucket: "lacak-9add0.firebasestorage.app",
+      messagingSenderId: "637614768388",
+      appId: "1:637614768388:web:ac1afa748a29a3e1a2d051",
+    };
+
+    /* ── INIT ── */
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    /* ── ORDER ID ── */
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('order_id');
+
+    /* ── STATE ── */
+    let map = null;
+    let techMarker = null;
+    let markerLayer = null;
+    let firstLocation = true;
+    let isCardCollapsed = false;
+
+    /* ── ELEMENTS ── */
+    const elLoading = document.getElementById('loading-overlay');
+    const elNoOrder = document.getElementById('no-order-overlay');
+    const elOrderChip = document.getElementById('order-chip');
+    const elStatusIcon = document.getElementById('status-icon-wrap');
+    const elStatusText = document.getElementById('status-text-wrap');
+    const elStatusTitle = document.getElementById('status-title');
+    const elStatusSub = document.getElementById('status-sub');
+    const elLiveBadge = document.getElementById('live-badge');
+    const elDLat = document.getElementById('d-lat');
+    const elDLng = document.getElementById('d-lng');
+    const elDAcc = document.getElementById('d-acc');
+    const elDTime = document.getElementById('d-time');
+    const elDCount = document.getElementById('d-count');
+    const elDStatus = document.getElementById('d-status');
+    const elBottomCard = document.getElementById('bottom-card');
+
+    /* ================================================================
+       ON LOAD
+    ================================================================ */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Validasi order ID
+      if (!orderId) {
+        elLoading.classList.add('hidden');
+        elNoOrder.style.display = 'flex';
+        return;
+      }
+
+      elOrderChip.textContent = orderId;
+
+      // Inisialisasi peta Leaflet
+      initMap();
+
+      // Mulai dengarkan perubahan data dari Firebase
+      listenToFirebase();
+    });
+
+    /* ================================================================
+       INISIALISASI LEAFLET MAP
+    ================================================================ */
+    function initMap() {
+      // Koordinat awal: kota Depok sebagai default
+      map = L.map('map', {
+        center: [-6.402484, 106.794241],
+        zoom: 13,
+        zoomControl: true,
+        attributionControl: false
+      });
+
+      // Tile layer OpenStreetMap (GRATIS, tanpa API key)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Custom attribution kecil di pojok
+      L.control.attribution({ prefix: '© OpenStreetMap' }).addTo(map);
+    }
+
+    /* ================================================================
+       CUSTOM MARKER ICON (motor/kurir style)
+    ================================================================ */
+    function createTechIcon() {
+      return L.divIcon({
+        html: `<div class="tech-marker">🏍️</div>`,
+        className: '',
+        iconSize: [44, 44],
+        iconAnchor: [22, 22],
+        popupAnchor: [0, -26]
+      });
+    }
+
+    /* ================================================================
+       FIREBASE LISTENER – real-time update
+    ================================================================ */
+    function listenToFirebase() {
+      const ref = db.ref(`tracking/${orderId}`);
+
+      ref.on('value', (snapshot) => {
+        // Hilangkan loading overlay setelah data pertama diterima
+        elLoading.classList.add('hidden');
+
+        const data = snapshot.val();
+
+        if (!data || !data.lat || !data.lng) {
+          // Teknisi belum kirim data
+          setStatusOffline();
+          return;
+        }
+
+        const { lat, lng, accuracy, updatedAt, status, count } = data;
+        const isActive = (status === 'active');
+
+        // Update UI card
+        if (isActive) {
+          setStatusActive(lat, lng, accuracy, updatedAt, count);
+        } else {
+          setStatusOffline();
+        }
+
+        // Update / buat marker di peta
+        updateMarker(lat, lng, accuracy, updatedAt);
+      });
+
+      // Handle connection error
+      db.ref('.info/connected').on('value', (snap) => {
+        if (!snap.val()) {
+          console.warn('Firebase: koneksi terputus, mencoba ulang...');
+        }
+      });
+    }
+
+    /* ================================================================
+       UPDATE MARKER DI PETA (smooth pan)
+    ================================================================ */
+    function updateMarker(lat, lng, accuracy, updatedAt) {
+      const latlng = L.latLng(lat, lng);
+
+      if (!techMarker) {
+        // Buat marker pertama kali
+        techMarker = L.marker(latlng, {
+          icon: createTechIcon(),
+          zIndexOffset: 1000
+        }).addTo(map);
+
+        // Popup info
+        techMarker.bindPopup(buildPopupContent(lat, lng, updatedAt), {
+          closeButton: false,
+          maxWidth: 200
+        });
+
+        // Auto focus ke lokasi pertama
+        map.setView(latlng, 16, { animate: true, duration: 1.2 });
+        firstLocation = false;
+
+      } else {
+        // ── SMOOTH MOVE: animasi marker berpindah ──
+        animateMarker(techMarker, latlng);
+
+        // Update popup content
+        techMarker.getPopup().setContent(buildPopupContent(lat, lng, updatedAt));
+
+        // Smooth pan peta mengikuti teknisi
+        if (!isCardCollapsed) {
+          map.panTo(latlng, { animate: true, duration: 0.8, easeLinearity: 0.3 });
+        }
+      }
+
+      // Lingkaran akurasi
+      if (markerLayer) map.removeLayer(markerLayer);
+      if (accuracy && accuracy < 500) {
+        markerLayer = L.circle(latlng, {
+          radius: accuracy,
+          color: '#c1121f',
+          fillColor: '#c1121f',
+          fillOpacity: 0.08,
+          weight: 1,
+          dashArray: '4'
+        }).addTo(map);
+      }
+    }
+
+    /* ── Animasi smooth marker berpindah ── */
+    function animateMarker(marker, newLatLng) {
+      const startLatLng = marker.getLatLng();
+      const startTime = performance.now();
+      const duration = 800; // ms
+
+      function step(timestamp) {
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = easeInOutCubic(progress);
+
+        const lat = startLatLng.lat + (newLatLng.lat - startLatLng.lat) * ease;
+        const lng = startLatLng.lng + (newLatLng.lng - startLatLng.lng) * ease;
+        marker.setLatLng([lat, lng]);
+
+        if (progress < 1) requestAnimationFrame(step);
+        else marker.setLatLng(newLatLng);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function easeInOutCubic(t) {
+      return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    /* ── Popup HTML ── */
+    function buildPopupContent(lat, lng, updatedAt) {
+      const time = updatedAt ? new Date(updatedAt).toLocaleTimeString('id-ID') : '–';
+      return `
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.6;min-width:160px;">
+          <div style="font-weight:800;font-size:13px;margin-bottom:6px;color:#c1121f;">🏍️ Teknisi Gemilang</div>
+          <div>📍 ${lat.toFixed(5)}, ${lng.toFixed(5)}</div>
+          <div style="color:#888;margin-top:2px;">🕐 ${time}</div>
+        </div>
+      `;
+    }
+
+    /* ================================================================
+       UI STATUS HELPERS
+    ================================================================ */
+    function setStatusActive(lat, lng, accuracy, updatedAt, count) {
+      elStatusIcon.className = 'status-icon-wrap active';
+      elStatusIcon.textContent = '🏍️';
+      elStatusText.className = 'status-text active';
+      elStatusTitle.textContent = 'Teknisi Sedang Dalam Perjalanan';
+      elStatusSub.textContent = 'Lokasi diperbarui secara real-time';
+      elLiveBadge.classList.add('visible');
+
+      const time = updatedAt ? new Date(updatedAt).toLocaleTimeString('id-ID') : '–';
+      elDLat.textContent = lat.toFixed(5);
+      elDLng.textContent = lng.toFixed(5);
+      elDAcc.textContent = accuracy ? `±${Math.round(accuracy)}m` : '–';
+      elDTime.textContent = time;
+      elDCount.textContent = count ? `${count}x` : '–';
+      elDStatus.textContent = 'Aktif 🟢';
+    }
+
+    function setStatusOffline() {
+      elStatusIcon.className = 'status-icon-wrap offline';
+      elStatusIcon.textContent = '📵';
+      elStatusText.className = 'status-text offline';
+      elStatusTitle.textContent = 'Teknisi Belum Mengaktifkan GPS';
+      elStatusSub.textContent = 'Silakan tunggu, teknisi akan segera aktif';
+      elLiveBadge.classList.remove('visible');
+      elDStatus.textContent = 'Offline 🔴';
+    }
+
+    /* ================================================================
+       FOCUS BUTTON — fokus ulang ke marker teknisi
+    ================================================================ */
+    function focusOnTech() {
+      if (techMarker) {
+        map.flyTo(techMarker.getLatLng(), 17, { animate: true, duration: 1.2 });
+        if (!techMarker.isPopupOpen()) techMarker.openPopup();
+      }
+    }
+
+    /* ================================================================
+       TOGGLE BOTTOM CARD
+    ================================================================ */
+    function toggleCard() {
+      isCardCollapsed = !isCardCollapsed;
+      elBottomCard.classList.toggle('collapsed', isCardCollapsed);
+    }
+  </script>
+
+</body>
+
+</html>
