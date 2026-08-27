@@ -176,10 +176,19 @@
             font-weight: 700;
             font-size: 14px;
             color: var(--primary);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .mh-call i {
             font-size: 15px;
+        }
+
+        .mh-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
         }
 
         /* ── PAGE HEAD ── */
@@ -1023,6 +1032,20 @@
         }
 
         /* ══════════ RESPONSIVE ══════════ */
+
+        /* Tablet landscape / small laptop */
+        @media (max-width: 1100px) {
+            .fp-layout {
+                grid-template-columns: 1fr 280px;
+                gap: 22px;
+            }
+
+            .fp-card {
+                padding: 32px 30px;
+            }
+        }
+
+        /* Tablet portrait */
         @media (max-width: 1024px) {
             .fp-layout {
                 grid-template-columns: 1fr;
@@ -1038,21 +1061,102 @@
                 flex: 1;
                 min-width: 260px;
             }
+
+            .container {
+                padding: 0 22px;
+            }
         }
 
+        @media (max-width: 900px) and (min-width: 769px) {
+            .form-grid {
+                gap: 18px 16px;
+            }
+        }
+
+        /* Mobile */
         @media (max-width: 768px) {
+            body {
+                font-size: 15.5px;
+            }
+
+            .container {
+                padding: 0 18px;
+            }
+
+            .mini-header .container {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                gap: 10px;
+            }
+
+            .mh-logo-img {
+                height: 34px;
+            }
+
+            .mh-right {
+                gap: 10px;
+            }
+
+            .mh-call {
+                font-size: 0;
+                gap: 0;
+            }
+
+            .mh-call i {
+                font-size: 17px;
+            }
+
+            .mh-call-txt {
+                display: none;
+            }
+
+            .mh-back {
+                padding: 9px 12px;
+            }
+
+            .page-head {
+                padding: 26px 0 4px;
+            }
+
+            .page-head p {
+                padding: 0 4px;
+            }
+
+            .progress-wrap {
+                padding: 22px 0 0;
+            }
+
             .fp-card {
-                padding: 26px 22px;
+                padding: 24px 18px;
                 min-height: 0;
+                border-radius: var(--radius-lg);
+            }
+
+            .sp-head {
+                margin-bottom: 20px;
+                padding-bottom: 16px;
+            }
+
+            .sp-head h2 {
+                font-size: 18.5px;
             }
 
             .svc-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .svc-card {
+                padding: 16px 8px;
             }
 
             .form-grid {
                 grid-template-columns: 1fr;
                 gap: 0;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
             }
 
             .review-grid {
@@ -1061,14 +1165,33 @@
 
             .time-grid {
                 grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .time-card {
+                flex-direction: row;
+                justify-content: center;
+                gap: 8px;
+                padding: 12px;
+            }
+
+            .issue-chips {
+                gap: 7px;
+            }
+
+            .issue-chip-lbl {
+                font-size: 13px;
+                padding: 8px 13px;
             }
 
             .p-label {
                 display: none;
             }
 
-            .page-head {
-                padding: 30px 0 4px;
+            .p-dot {
+                width: 34px;
+                height: 34px;
+                font-size: 13.5px;
             }
 
             .mh-back span {
@@ -1079,27 +1202,142 @@
                 flex-direction: column;
             }
 
+            .side-card {
+                min-width: 0;
+            }
+
             .step-nav {
                 flex-wrap: wrap;
+                gap: 10px;
             }
 
             .step-nav .btn {
-                flex: 1;
+                flex: 1 1 auto;
+                padding: 14px 18px;
+                font-size: 14.5px;
+            }
+
+            .success-box {
+                padding: 34px 24px;
             }
         }
 
-        @media (max-width: 420px) {
+        /* Small phones */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
             .svc-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
 
             .svc-card {
-                padding: 16px 8px;
+                padding: 14px 6px;
+                gap: 8px;
+            }
+
+            .svc-card i {
+                font-size: 19px;
+            }
+
+            .svc-card span {
+                font-size: 12.5px;
             }
 
             .fp-card {
-                padding: 22px 16px;
+                padding: 20px 14px;
+            }
+
+            .page-head h1 {
+                font-size: 22px;
+            }
+
+            .page-head p {
+                font-size: 14px;
+            }
+
+            .ph-eyebrow {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
+
+            .progress-track {
+                max-width: 100%;
+            }
+
+            .p-dot {
+                width: 30px;
+                height: 30px;
+                font-size: 13px;
+            }
+
+            .issue-chips {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .issue-chip {
+                width: 100%;
+            }
+
+            .issue-chip-lbl {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .pill-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .pill-opt {
+                width: 100%;
+            }
+
+            .pill-lbl {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .review-block {
+                padding: 14px 16px;
+            }
+
+            .upload-box {
+                padding: 20px 14px;
+            }
+
+            .step-nav .btn span {
+                display: inline;
+            }
+        }
+
+        /* Very small phones */
+        @media (max-width: 360px) {
+            .svc-card span {
+                font-size: 11.5px;
+            }
+
+            .btn {
+                font-size: 13.5px;
+                padding: 13px 16px;
+            }
+
+            .mh-logo-img {
+                height: 30px;
+            }
+        }
+
+        @media (hover: none) {
+
+            .svc-card:hover,
+            .issue-chip-lbl:hover,
+            .pill-lbl:hover,
+            .time-card:hover {
+                transform: none;
             }
         }
     </style>
@@ -1112,8 +1350,9 @@
             <a href="index.html" class="mh-logo">
                 <img src="logo.png" alt="Gemilang Teknik Service" class="mh-logo-img">
             </a>
-            <div style="display:flex;align-items:center;gap:14px;">
-                <a class="mh-call" href="tel:6285355836128"><i class="fas fa-phone"></i> 0853-5583-6128</a>
+            <div class="mh-right">
+                <a class="mh-call" href="tel:6285355836128"><i class="fas fa-phone"></i> <span
+                        class="mh-call-txt">0853-5583-6128</span></a>
                 <a href="index.html" class="mh-back"><i class="fas fa-arrow-left"></i> <span>Kembali ke
                         Beranda</span></a>
             </div>
@@ -1373,17 +1612,20 @@
                                             <label class="time-opt">
                                                 <input type="radio" name="waktu" value="Pagi (08.00 - 11.00)">
                                                 <div class="time-card">
-                                                    <strong>Pagi</strong><span>08.00&ndash;11.00</span></div>
+                                                    <strong>Pagi</strong><span>08.00&ndash;11.00</span>
+                                                </div>
                                             </label>
                                             <label class="time-opt">
                                                 <input type="radio" name="waktu" value="Siang (11.00 - 14.00)">
                                                 <div class="time-card">
-                                                    <strong>Siang</strong><span>11.00&ndash;14.00</span></div>
+                                                    <strong>Siang</strong><span>11.00&ndash;14.00</span>
+                                                </div>
                                             </label>
                                             <label class="time-opt">
                                                 <input type="radio" name="waktu" value="Sore (14.00 - 18.00)">
                                                 <div class="time-card">
-                                                    <strong>Sore</strong><span>14.00&ndash;18.00</span></div>
+                                                    <strong>Sore</strong><span>14.00&ndash;18.00</span>
+                                                </div>
                                             </label>
                                         </div>
                                     </div>
