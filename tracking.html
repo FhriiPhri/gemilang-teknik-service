@@ -14,10 +14,10 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- CSS & JS Leaflet tanpa atribut integrity -->
+  <!-- Leaflet CSS & JS Clean (Tanpa atribut integrity yang bikin diblokir) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  
+
   <style>
     *,
     *::before,
@@ -60,6 +60,8 @@
       position: fixed;
       inset: 0;
       z-index: 1;
+      width: 100%;
+      height: 100%;
     }
 
     /* ══ LEAFLET TILE DARK FILTER ══ */
@@ -313,9 +315,8 @@
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      transition: background var(--transition);
       max-height: 200px;
-      transition: max-height var(--transition), opacity var(--transition), margin var(--transition);
+      transition: max-height var(--transition), opacity var(--transition), margin var(--transition), background var(--transition);
     }
 
     .bottom-card.collapsed .btn-focus {
@@ -460,7 +461,6 @@
       background: rgba(255, 255, 255, .1) !important;
     }
 
-    /* Responsive */
     @media (max-width: 480px) {
       .stats-grid {
         grid-template-columns: 1fr 1fr;
@@ -549,22 +549,12 @@
     </button>
   </div>
 
-
-  <!-- ================================================================
-       FIREBASE SDK v9 (Compat Mode)
-  ================================================================ -->
+  <!-- FIREBASE SDK v9 (Compat Mode) -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-  <!-- Leaflet.js -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
-
   <script>
-    /* ================================================================
-       STEP 1 — GANTI dengan konfigurasi Firebase Anda
-       (SAMA dengan yang di teknisi.html!)
-    ================================================================ */
+    /* ── FIREBASE CONFIG ── */
     const firebaseConfig = {
       apiKey: "AIzaSyBfyyaAhntAGq5qAwvtGnzd7PWI_ehrxjc",
       authDomain: "lacak-9add0.firebaseapp.com",
@@ -575,7 +565,7 @@
       appId: "1:637614768388:web:ac1afa748a29a3e1a2d051",
     };
 
-    /* ── INIT ── */
+    /* ── INIT FIREBASE ── */
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
@@ -583,14 +573,13 @@
     const params = new URLSearchParams(window.location.search);
     const orderId = params.get('order_id');
 
-    /* ── STATE ── */
+    /* ── GLOBAL STATE ── */
     let map = null;
     let techMarker = null;
     let markerLayer = null;
-    let firstLocation = true;
     let isCardCollapsed = false;
 
-    /* ── ELEMENTS ── */
+    /* ── DOM ELEMENTS ── */
     const elLoading = document.getElementById('loading-overlay');
     const elNoOrder = document.getElementById('no-order-overlay');
     const elOrderChip = document.getElementById('order-chip');
@@ -607,11 +596,8 @@
     const elDStatus = document.getElementById('d-status');
     const elBottomCard = document.getElementById('bottom-card');
 
-    /* ================================================================
-       ON LOAD
-    ================================================================ */
+    /* ── ON LOAD ── */
     window.addEventListener('DOMContentLoaded', () => {
-      // Validasi order ID
       if (!orderId) {
         elLoading.classList.add('hidden');
         elNoOrder.style.display = 'flex';
@@ -619,47 +605,33 @@
       }
 
       elOrderChip.textContent = orderId;
-
-      // Inisialisasi peta Leaflet
       initMap();
-
-      // Mulai dengarkan perubahan data dari Firebase
       listenToFirebase();
     });
 
-    /* ================================================================
-       INISIALISASI LEAFLET MAP
-    ================================================================ */
+    /* ── INIT LEAFLET MAP ── */
     function initMap() {
-      // Koordinat awal: kota Depok sebagai default
       map = L.map('map', {
-        center: [-6.402484, 106.794241],
+        center: [-6.402484, 106.794241], // Default Kota Depok
         zoom: 13,
         zoomControl: true,
         attributionControl: false
       });
 
-      // Tile layer OpenStreetMap (GRATIS, tanpa API key)
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap contributors'
       }).addTo(map);
 
-      // Custom attribution kecil di pojok
       L.control.attribution({ prefix: '© OpenStreetMap' }).addTo(map);
 
-      // Setelah kamu buat objek map
-      const map = L.map('map').setView([lat, lng], zoom);
-
-      // Tambahkan baris ini di bawahnya:
+      // Perbaikan render peta pecah
       setTimeout(() => {
-        map.invalidateSize();
+        if (map) map.invalidateSize();
       }, 300);
     }
 
-    /* ================================================================
-       CUSTOM MARKER ICON (motor/kurir style)
-    ================================================================ */
+    /* ── CUSTOM MARKER ICON ── */
     function createTechIcon() {
       return L.divIcon({
         html: `<div class="tech-marker">🏍️</div>`,
@@ -670,20 +642,15 @@
       });
     }
 
-    /* ================================================================
-       FIREBASE LISTENER – real-time update
-    ================================================================ */
+    /* ── FIREBASE LISTENER ── */
     function listenToFirebase() {
       const ref = db.ref(`tracking/${orderId}`);
 
       ref.on('value', (snapshot) => {
-        // Hilangkan loading overlay setelah data pertama diterima
         elLoading.classList.add('hidden');
-
         const data = snapshot.val();
 
         if (!data || !data.lat || !data.lng) {
-          // Teknisi belum kirim data
           setStatusOffline();
           return;
         }
@@ -691,62 +658,41 @@
         const { lat, lng, accuracy, updatedAt, status, count } = data;
         const isActive = (status === 'active');
 
-        // Update UI card
         if (isActive) {
           setStatusActive(lat, lng, accuracy, updatedAt, count);
         } else {
           setStatusOffline();
         }
 
-        // Update / buat marker di peta
         updateMarker(lat, lng, accuracy, updatedAt);
-      });
-
-      // Handle connection error
-      db.ref('.info/connected').on('value', (snap) => {
-        if (!snap.val()) {
-          console.warn('Firebase: koneksi terputus, mencoba ulang...');
-        }
       });
     }
 
-    /* ================================================================
-       UPDATE MARKER DI PETA (smooth pan)
-    ================================================================ */
+    /* ── UPDATE MARKER ── */
     function updateMarker(lat, lng, accuracy, updatedAt) {
       const latlng = L.latLng(lat, lng);
 
       if (!techMarker) {
-        // Buat marker pertama kali
         techMarker = L.marker(latlng, {
           icon: createTechIcon(),
           zIndexOffset: 1000
         }).addTo(map);
 
-        // Popup info
         techMarker.bindPopup(buildPopupContent(lat, lng, updatedAt), {
           closeButton: false,
           maxWidth: 200
         });
 
-        // Auto focus ke lokasi pertama
         map.setView(latlng, 16, { animate: true, duration: 1.2 });
-        firstLocation = false;
-
       } else {
-        // ── SMOOTH MOVE: animasi marker berpindah ──
         animateMarker(techMarker, latlng);
-
-        // Update popup content
         techMarker.getPopup().setContent(buildPopupContent(lat, lng, updatedAt));
 
-        // Smooth pan peta mengikuti teknisi
         if (!isCardCollapsed) {
           map.panTo(latlng, { animate: true, duration: 0.8, easeLinearity: 0.3 });
         }
       }
 
-      // Lingkaran akurasi
       if (markerLayer) map.removeLayer(markerLayer);
       if (accuracy && accuracy < 500) {
         markerLayer = L.circle(latlng, {
@@ -760,11 +706,11 @@
       }
     }
 
-    /* ── Animasi smooth marker berpindah ── */
+    /* ── ANIMASI SMOOTH MOVE ── */
     function animateMarker(marker, newLatLng) {
       const startLatLng = marker.getLatLng();
       const startTime = performance.now();
-      const duration = 800; // ms
+      const duration = 800;
 
       function step(timestamp) {
         const elapsed = timestamp - startTime;
@@ -786,7 +732,7 @@
       return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
 
-    /* ── Popup HTML ── */
+    /* ── POPUP HTML ── */
     function buildPopupContent(lat, lng, updatedAt) {
       const time = updatedAt ? new Date(updatedAt).toLocaleTimeString('id-ID') : '–';
       return `
@@ -798,9 +744,7 @@
       `;
     }
 
-    /* ================================================================
-       UI STATUS HELPERS
-    ================================================================ */
+    /* ── UI HELPERS ── */
     function setStatusActive(lat, lng, accuracy, updatedAt, count) {
       elStatusIcon.className = 'status-icon-wrap active';
       elStatusIcon.textContent = '🏍️';
@@ -828,9 +772,6 @@
       elDStatus.textContent = 'Offline 🔴';
     }
 
-    /* ================================================================
-       FOCUS BUTTON — fokus ulang ke marker teknisi
-    ================================================================ */
     function focusOnTech() {
       if (techMarker) {
         map.flyTo(techMarker.getLatLng(), 17, { animate: true, duration: 1.2 });
@@ -838,9 +779,6 @@
       }
     }
 
-    /* ================================================================
-       TOGGLE BOTTOM CARD
-    ================================================================ */
     function toggleCard() {
       isCardCollapsed = !isCardCollapsed;
       elBottomCard.classList.toggle('collapsed', isCardCollapsed);
