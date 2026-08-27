@@ -536,14 +536,6 @@
             grid-template-columns: 1.05fr 0.95fr;
             gap: 48px;
             align-items: center;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 60px;
-
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -1082,7 +1074,7 @@
 
         .about-float {
             position: absolute;
-            bottom: -22px;
+            top: -22px;
             right: -22px;
             background: var(--primary);
             border-radius: var(--radius);
@@ -1090,6 +1082,7 @@
             text-align: center;
             box-shadow: var(--shadow);
             border: 4px solid #fff;
+            z-index: 3;
         }
 
         .af-num {
@@ -1878,7 +1871,18 @@
             text-decoration: none;
             box-shadow: 0 8px 24px rgba(22, 163, 74, 0.45);
             animation: waPulse 3.2s ease-in-out infinite;
-            transition: transform var(--transition);
+            transition: transform var(--transition), opacity var(--transition), visibility var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px) scale(0.9);
+            pointer-events: none;
+        }
+
+        .float-wa.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
 
         .float-wa:hover {
@@ -2087,7 +2091,7 @@
 
             .about-float {
                 right: 8px;
-                bottom: -16px;
+                top: -16px;
                 padding: 16px 20px;
             }
 
@@ -2339,13 +2343,15 @@
                 padding: 0 20px 0 16px;
                 font-size: 24px;
                 bottom: 18px;
+                /* Sejajar di bawah */
                 right: 18px;
             }
 
             .back-top {
                 width: 46px;
                 height: 46px;
-                bottom: 80px;
+                bottom: 18px;
+                /* Diubah dari 80px ke 18px agar sejajar dengan tombol WA */
                 left: 18px;
                 font-size: 16px;
             }
@@ -2425,7 +2431,7 @@
 
             .about-float {
                 right: 4px;
-                bottom: -14px;
+                top: -14px;
                 padding: 12px 16px;
             }
 
@@ -3636,7 +3642,7 @@
     </footer>
 
     <a href="https://wa.me/6285355836128?text=Halo%20Gemilang%20Teknik%20Service,%20saya%20ingin%20memperbaiki%20perangkat%20elektronik%20saya"
-        target="_blank" class="float-wa" aria-label="Chat WhatsApp">
+        target="_blank" class="float-wa" id="float-wa" aria-label="Chat WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="float-wa-label">Chat Kami</span>
     </a>
@@ -3774,8 +3780,11 @@
         revEls.forEach(el => revObs.observe(el));
 
         const btBtn = document.getElementById('back-top');
+        const fwBtn = document.getElementById('float-wa');
         window.addEventListener('scroll', () => {
-            btBtn.classList.toggle('show', window.scrollY > 400);
+            const pastHero = window.scrollY > 400;
+            btBtn.classList.toggle('show', pastHero);
+            fwBtn.classList.toggle('show', pastHero);
         }, { passive: true });
         btBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
