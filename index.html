@@ -2658,23 +2658,20 @@
         }
         if (!reduce) setTimeout(() => $$('[data-count]').forEach(count), 900);
         // scroll effects
-        const hdr = $('#hdr'), prog = $('#progress'), fwa = $('#fwa'), top = $('#top'), img = $('#hero-img'), secs = $$('main,section[id]'), links = $$('.nav-links a[href^="#"]:not(.nav-cta)');
-        let lastY = 0, tick = false;
+        const hdr = $('#hdr'), prog = $('#progress'), fwa = $('#fwa'), scrollTopBtn = $('#top'), img = $('#hero-img'), secs = $$('main,section[id]'), links = $$('.nav-links a[href^="#"]:not(.nav-cta)'); let lastY = 0, tick = false;
         function onScroll() {
             const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
             prog.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
             hdr.classList.toggle('scrolled', y > 30);
             hdr.classList.toggle('hide', y > lastY + 4 && y > 500 && !$('#nav').classList.contains('open') || false); if (y < lastY - 4) hdr.classList.remove('hide');
             lastY = y;
-            fwa.classList.toggle('show', y > 400); top.classList.toggle('show', y > 400);
-            if (!reduce && y < innerHeight) img.style.setProperty('--py', (y * .06) + 'px');
+            fwa.classList.toggle('show', y > 400); scrollTopBtn.classList.toggle('show', y > 400); if (!reduce && y < innerHeight) img.style.setProperty('--py', (y * .06) + 'px');
             let cur = ''; secs.forEach(s => { if (s.id && s.getBoundingClientRect().top < innerHeight * .4) cur = s.id });
             links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
             tick = false
         }
         addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(onScroll) } }, { passive: true }); onScroll();
-        top.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
-        // tilt hero
+        scrollTopBtn.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));        // tilt hero
         const fr = $('#frame');
         if (!reduce && matchMedia('(hover:hover)').matches) {
             const hv = $('#hv');
